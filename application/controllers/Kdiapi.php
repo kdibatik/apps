@@ -20,7 +20,7 @@ class KdiApi extends REST_Controller {
             // print_r($ket);
             // echo "</pre>";
 
-            $profileData = $this->Kdimodel->getProfileData();
+            $profileData = $this->Kdimodel->getProfileData($username);
         
         if (count($profileData) == 0) {
             $data["message"] = "User Tidak ditemukan";
