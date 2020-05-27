@@ -15,7 +15,7 @@ class KdiModel extends CI_Model
   }
 
   public function getProfileData ($username){
-    $this->db->select('A.username,A.laveluser,A.name,A.email,A.idgoogle');
+    $this->db->select('A.username,A.laveluser,A.name,A.email,A.idgoogle,A.picture');
     $this->db->from("{$this->user} A");
     $this->db->where('username', $username);
       $query = $this->db->get();
