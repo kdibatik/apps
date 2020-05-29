@@ -56,5 +56,26 @@ class KdiApi extends REST_Controller {
         $this->response($data, REST_Controller::HTTP_OK);
 
     }
+    public function getomset_post(){
+
+        $username = $this->post("username");
+            // echo "<pre>";
+            // print_r($ket);
+            // echo "</pre>";
+
+        $omsetData = $this->Kdimodel->getOmset($username);
+        
+        if (count($omsetData) == 0) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Get Profile";
+        }
+           
+        $data["data"] = $omsetData;
+        $this->response($data, REST_Controller::HTTP_OK);
+
+    }
 
 }
