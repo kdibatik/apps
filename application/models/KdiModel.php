@@ -16,7 +16,7 @@ class KdiModel extends CI_Model
 
   public function getProfileData ($username){
     $month = date('m');
-    $this->db->select('A.username,A.laveluser,A.name,A.email,A.idgoogle,A.picture,SUM(B.grandtotal) as ttl')
+    $this->db->select('A.username,A.laveluser,A.name,A.email,A.idgoogle,A.picture,SUM(B.grandtotal) as ttl');
     $this->db->from("{$this->user} A");
     $this->db->join("{$this->soh} B", 'A.usernmae = B.sales');
     $this->db->where('A.email', $username);
