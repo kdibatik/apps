@@ -5,6 +5,7 @@ class KdiModel extends CI_Model
 {
   public $user = 'user';
   public $soh = 'so_h';
+  public $cst = 'customer';
 
 
   public function __construct()
@@ -27,9 +28,11 @@ class KdiModel extends CI_Model
 
   public function getOmsetLimit ($username){
     $month = date('m');
-    $this->db->select('A.noso,A.perusahaan,A.tgl,A.grandtotal,A.stsapprove');
-    $this->db->from("{$this->user} A");
-    $this->db->where('A.email', $username);
+    $this->db->select('A.noso,B.perusahaan,A.tgl,A.grandtotal,A.stsapprove');
+    $this->db->from("{$this->soh} A");
+    $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
+    $this->db->join("{$this->user} C", 'A.sales =Cc.username');
+    $this->db->where('C.email', $username);
     $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->limit(5); 
