@@ -24,4 +24,16 @@ class KdiModel extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
+
+  public function getOmsetLimit ($username){
+    $month = date('m');
+    $this->db->select('A.noso,A.perusahaan,A.tgl,A.grandtotal,A.stsapprove');
+    $this->db->from("{$this->user} A");
+    $this->db->where('A.email', $username);
+    $this->db->where('Month(A.tgl)', $month);
+    $this->db->order_by("A.tgl", "DESC");
+    $this->db->limit(5); 
+    $query = $this->db->get();
+    return $query->result();
+  }
 }
