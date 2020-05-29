@@ -20,6 +20,7 @@ class KdiModel extends CI_Model
     $this->db->from("{$this->user} A");
     $this->db->join("{$this->soh} B", 'A.username = B.sales');
     $this->db->where('A.email', $username);
+    $this->db->where('Month(B.tgl)', $month);
     $query = $this->db->get();
     return $query->result();
   }
