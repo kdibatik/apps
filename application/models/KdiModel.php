@@ -67,7 +67,7 @@ class KdiModel extends CI_Model
     $query = $this->db->get();
       if(!empty($query))
       {
-        $query->result() as $key=>$item
+        for($query->result() as $key=>$item){
               $noso = $item->noso;
               // $kodemerek=$merek;
               //buat array keterangan
@@ -85,6 +85,7 @@ class KdiModel extends CI_Model
               $ambildata=$this->getOrderDetail($item->noso);
               $soh["sod"]=$ambildata;
               $data = $soh;
+        }
               
       }
       return $data;
