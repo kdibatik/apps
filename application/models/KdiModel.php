@@ -71,7 +71,7 @@ class KdiModel extends CI_Model
               $noso = $item->noso;
               // $kodemerek=$merek;
               //buat array keterangan
-              $soh[]=array(
+              $soh["soh"]=array(
                 'noso'=>$item->noso,
                 'perusahaan'=>$item->perusahaan,
                 'alamat'=>$item->alamat,
