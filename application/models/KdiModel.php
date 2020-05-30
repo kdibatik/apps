@@ -78,7 +78,7 @@ class KdiModel extends CI_Model
                 'tel'=>$item->tel,
                 'tgl'=>$item->tgl,
                 'grandtotal'=>$item->grandtotal,
-                'stsapprove'=>$item->stapprove,
+                'stsapprove'=>$item->stsapprove,
                 'total'=>$item->total,
                 'ppn'=>$item->ppn,
               );
