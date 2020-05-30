@@ -95,7 +95,7 @@ class KdiModel extends CI_Model
     $this->db->select('A.noso,A.kodebrg,A.ukuran,A.unitqty,A.qty,A.unit,A.warna,A.price,A.total');
     $this->db->from("{$this->sod} A");
     $this->db->where('A.noso', $noso);
-    $this->db->order_by("A.kodebrg DESC", "A.Warna DESC");
+    $this->db->order_by("A.Warna DESC");
     $query = $this->db->get();
     return $query->result_array();
   }
