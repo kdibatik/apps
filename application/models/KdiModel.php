@@ -58,7 +58,7 @@ class KdiModel extends CI_Model
     $data = array();
     $soh=array();
     //$ukur=array();
-    $this->db->select('A.noso,B.perusahaan,B.alamat,B.notel,A.tgl,A.grandtotal,A.total,A.ppn,A.stsapprove');
+    $this->db->select('A.noso,B.perusahaan,B.alamat,B.tel,A.tgl,A.grandtotal,A.total,A.ppn,A.stsapprove');
     $this->db->from("{$this->soh} A");
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
     $this->db->join("{$this->user} C", 'A.sales = C.username');
