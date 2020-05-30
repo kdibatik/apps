@@ -75,7 +75,7 @@ class KdiModel extends CI_Model
                 'noso'=>$item->noso,
                 'perusahaan'=>$item->perusahaan,
                 'alamat'=>$item->alamat,
-                'notel'=>$item->notel,
+                'tel'=>$item->tel,
                 'tgl'=>$item->tgl,
                 'grandtotal'=>$item->grandtotal,
                 'stsapprove'=>$item->stapprove,
