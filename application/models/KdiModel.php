@@ -156,6 +156,7 @@ class KdiModel extends CI_Model
       $data = array();
       $datastc=array();
       $datatemp=array();
+
     if ($sts == "RS"){
  
       $this->db->select('A.warna');
@@ -169,7 +170,7 @@ class KdiModel extends CI_Model
         foreach($query->result() as $key=>$item){
           $datastc["color"] = $item->warna;
           $ambildata=$this->getStockDetail($item->warna,$sts,$kodepro);
-          $datastc["color"][$item->warna]=$ambildata;
+          $datastc["dataproduct"]=$ambildata;
           
         }
        
