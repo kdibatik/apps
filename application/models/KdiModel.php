@@ -151,4 +151,66 @@ class KdiModel extends CI_Model
     $query = $this->db->get();
     return $query->result_array();
   }
+
+  public function getsisastock($sts,$gol,$kodpro){
+      $data = array();
+      $datastc=array();
+    if ($sts == "RS"){
+ 
+      $this->db->select('A.warna');
+      $this->db->from("{$this->stock} A");
+      $this->db->where('A.kodepro', $kodepro);
+      $this->db->group_by("A.warna");
+      $query = $this->db->get();
+      if(!empty($query))
+      {
+        foreach($query->result() as $key=>$item){
+          
+          $ambildata=$this->getStockDetail($item->warna,$sts,$kodepro);
+          $datastc[$item->warna]=$ambildata;
+          $data = $datastc;
+        }
+      }
+
+    }elseif($sts == "PS"){
+
+      $this->db->select('A.warna');
+      $this->db->from("{$this->stockpre} A");
+      $this->db->where('A.kodepro', $kodepro);
+      $this->db->group_by("A.warna");
+      $query = $this->db->get();
+      if(!empty($query))
+      {
+        foreach($query->result() as $key=>$item){
+          
+          $ambildata=$this->getStockDetail($item->warna,$sts,$kodepro);
+          $datastc[$item->warna]=$ambildata;
+          $data = $datastc;
+        }
+      }
+    }
+    
+    return $data;
+  }
+
+  public function getStockDetail($warna,$sts,$kodepro){
+    if($sts=="RS"){
+      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisa,A."Roll",A.warna ');
+      $this->db->from("{$this->stock} A");
+      $this->db->where('A.kodepro', $kodpero);
+      $this->db->where('A.sisasls >', 0);
+      $this->db->where('A.warna >', $warna);
+      $this->db->group_by("A.warna ASC,A.ukuran DESC");
+    }elseif($sts=="PS"){
+      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisa,A."Roll",A.warna ');
+      $this->db->from("{$this->stockpre} A");
+      $this->db->where('A.kodepro', $kodpero);
+      $this->db->where('A.sisa >', 0);
+      $this->db->where('A.warna >', $warna);
+      $this->db->group_by("A.warna ASC,A.ukuran DESC");
+    }
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
 }
