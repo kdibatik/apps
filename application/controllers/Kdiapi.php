@@ -118,7 +118,7 @@ class KdiApi extends REST_Controller {
     }
 
     
-    public function getGolProduct_post(){
+    public function getGolWarna_post(){
             
         $sts=$this->post("idsts");
         $gol=$this->post("gol");
