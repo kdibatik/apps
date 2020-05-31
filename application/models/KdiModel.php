@@ -152,7 +152,7 @@ class KdiModel extends CI_Model
     return $query->result_array();
   }
 
-  public function getstock($sts,$gol,$kodpro){
+  public function getstock($sts,$gol,$kodepro){
       $data = array();
       $datastc=array();
     if ($sts == "RS"){
