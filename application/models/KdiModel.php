@@ -104,19 +104,19 @@ class KdiModel extends CI_Model
     $query = $this->db->get();
     return $query->result_array();
   }
-  
+
 
   public function getproductgol($sts){
     if($sts =="RS"){
       
-      $this->db->select('A.gol.nama,COUNT(B.id) AS ttl');
+      $this->db->select('A.nama,COUNT(B.id) AS ttl');
       $this->db->from("{$this->golstock} A");
       $this->db->join("{$this->viewgolstockpre} B", 'A.id = B.id');
       $this->db->group_by("B.id");
 
     }else if($sts =="PS"){
      
-      $this->db->select('A.gol.nama,COUNT(B.id) AS ttl');
+      $this->db->select('A.nama,COUNT(B.id) AS ttl');
       $this->db->from("{$this->golstock} A");
       $this->db->join("{$this->viewgolstock} B", 'A.id = B.id');
       $this->db->group_by("B.id");
