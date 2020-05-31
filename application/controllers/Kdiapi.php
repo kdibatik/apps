@@ -104,17 +104,34 @@ class KdiApi extends REST_Controller {
     public function getGolProduct_post(){
             
         $sts=$this->post("idsts");
-        $omsetData = $this->Kdimodel->getproductgol($sts);
-        if (count($omsetData) == 0) {
+        $golData = $this->Kdimodel->getproductgol($sts);
+        if (count($golData) == 0) {
             $data["message"] = "User Tidak ditemukan";
             $data["success"] = 0;
         }else{
             $data["success"] = 1;
             $data["message"] = "Success Get Order Detail";
         }
-        $data["data"] = $omsetData;
+        $data["data"] = $golData;
         $this->response($data, REST_Controller::HTTP_OK);
 
     }
 
+    
+    public function getGolProduct_post(){
+            
+        $sts=$this->post("idsts");
+        $gol=$this->post("gol");
+        $golPoduct = $this->Kdimodel->getproductwarna($sts.$gol);
+        if (count($golPoduct) == 0) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Get Order Detail";
+        }
+        $data["data"] = $golPoduct;
+        $this->response($data, REST_Controller::HTTP_OK);
+
+    }
 }

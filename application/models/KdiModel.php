@@ -126,4 +126,29 @@ class KdiModel extends CI_Model
     $query = $this->db->get();
     return $query->result_array();
   }
+
+  public function getproductwarna($sts,$gol){
+    if($sts =="RS"){
+      
+      $this->db->select('A.kodepro,count(B.kodepro) as warna');
+      $this->db->from("{$this->prod} A");
+      $this->db->join("{$this->stock} B", 'A.kodepro = B.kodepro');
+      $this->db->where('A.nama', $gol);
+      $this->db->where('B.sisa', > 0);
+      $this->db->group_by("A.kodepro,A.namapro");
+
+    }else if($sts =="PS"){
+     
+      $this->db->select('A.kodepro,count(B.kodepro) as warna');
+      $this->db->from("{$this->prod} A");
+      $this->db->join("{$this->stockpre} B", 'A.kodepro = B.kodepro');
+      $this->db->where('A.nama', $gol);
+      $this->db->where('B.sisasls', > 0);
+      $this->db->group_by("A.kodepro,A.namapro");
+
+    }
+
+    $query = $this->db->get();
+    return $query->result_array();
+  }
 }
