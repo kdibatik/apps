@@ -109,14 +109,14 @@ class KdiModel extends CI_Model
   public function getproductgol($sts){
     if($sts =="RS"){
       
-      $this->db->select('A.nama,COUNT(B.id) AS ttl');
+      $this->db->select('A.id,A.nama,COUNT(B.id) AS ttl');
       $this->db->from("{$this->golstock} A");
       $this->db->join("{$this->viewgolstockpre} B", 'A.id = B.id');
       $this->db->group_by("B.id");
 
     }else if($sts =="PS"){
      
-      $this->db->select('A.nama,COUNT(B.id) AS ttl');
+      $this->db->select('A.id,A.nama,COUNT(B.id) AS ttl');
       $this->db->from("{$this->golstock} A");
       $this->db->join("{$this->viewgolstock} B", 'A.id = B.id');
       $this->db->group_by("B.id");
@@ -133,7 +133,7 @@ class KdiModel extends CI_Model
       $this->db->select('A.kodepro,count(B.kodepro) as warna');
       $this->db->from("{$this->prod} A");
       $this->db->join("{$this->stock} B", 'A.kodepro = B.kodepro');
-      $this->db->where('A.nama', $gol);
+      $this->db->where('A.gol', $gol);
       $this->db->where('B.sisa >', 0);
       $this->db->group_by("A.kodepro,A.namapro");
 
@@ -142,7 +142,7 @@ class KdiModel extends CI_Model
       $this->db->select('A.kodepro,count(B.kodepro) as warna');
       $this->db->from("{$this->prod} A");
       $this->db->join("{$this->stockpre} B", 'A.kodepro = B.kodepro');
-      $this->db->where('A.nama', $gol);
+      $this->db->where('A.gol', $gol);
       $this->db->where('B.sisasls >', 0);
       $this->db->group_by("A.kodepro,A.namapro");
 
