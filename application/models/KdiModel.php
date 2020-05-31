@@ -7,7 +7,12 @@ class KdiModel extends CI_Model
   public $soh = 'so_h';
   public $cst = 'customer';
   public $sod = 'so_d';
-
+  public $viewgolstockpre = 'golstockpre';
+  public $viewgolstock = 'golstock';
+  public $prod = 'product';
+  public $stock = 'stock';
+  public $stockpre = 'stockpre';
+  public $golstock = 'gol';
 
   public function __construct()
 
@@ -96,6 +101,28 @@ class KdiModel extends CI_Model
     $this->db->from("{$this->sod} A");
     $this->db->where('A.noso', $noso);
     $this->db->order_by("A.Warna DESC");
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+  
+
+  public function getproductgol($sts){
+    if($sts =="RS"){
+      
+      $this->db->select('A.gol.nama,COUNT(B.id) AS ttl');
+      $this->db->from("{$this->golstock} A");
+      $this->db->join("{$this->viewgolstockpre} B", 'A.id = B.id');
+      $this->db->group_by("B.id");
+
+    }else if($sts =="PS"){
+     
+      $this->db->select('A.gol.nama,COUNT(B.id) AS ttl');
+      $this->db->from("{$this->golstock} A");
+      $this->db->join("{$this->viewgolstock} B", 'A.id = B.id');
+      $this->db->group_by("B.id");
+
+    }
+
     $query = $this->db->get();
     return $query->result_array();
   }
