@@ -122,7 +122,7 @@ class KdiApi extends REST_Controller {
             
         $sts=$this->post("idsts");
         $gol=$this->post("gol");
-        $golPoduct = $this->Kdimodel->getproductwarna($sts.$gol);
+        $golPoduct = $this->Kdimodel->getproductwarna($sts,$gol);
         if (count($golPoduct) == 0) {
             $data["message"] = "User Tidak ditemukan";
             $data["success"] = 0;
