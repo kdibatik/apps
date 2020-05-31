@@ -166,9 +166,9 @@ class KdiModel extends CI_Model
       $query = $this->db->get();
       if(!empty($query))
       {
-        Print_r($query->Result());
-        foreach($query->result() as $key=>$item){
-          $datastc["data"]["color"]=$item->warna;
+        //Print_r($query->Result());
+        foreach($query->result() as $row){
+          $datastc["data"]["color"]=$row->warna;
           // $ambildata=$this->getStockDetail($item->warna,$sts,$kodepro);
           // $datastc["data"]["dataproduct"]=$ambildata;
         }
