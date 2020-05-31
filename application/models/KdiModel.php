@@ -152,7 +152,7 @@ class KdiModel extends CI_Model
     return $query->result_array();
   }
 
-  public function getstock_lama($sts,$gol,$kodepro){
+  public function getstock($sts,$gol,$kodepro){
       $data = array();
       $datastc=array();
       $datatemp=array();
@@ -172,7 +172,7 @@ class KdiModel extends CI_Model
           $datatemp[$item->warna]=$ambildata;
           
         }
-        $datastc["itemcolor"]=$datatemp;
+        $datastc[]=$datatemp;
         $data = $datastc;
       }
 
@@ -193,7 +193,7 @@ class KdiModel extends CI_Model
           
 
         }
-        $datastc["itemcolor"]=$datatemp;
+        $datastc[]=$datatemp;
         $data = $datastc;
       }
     }
@@ -222,7 +222,7 @@ class KdiModel extends CI_Model
     return $query->result_array();
   }
 
-  public function getstock($sts,$gol,$kodepro){
+  public function getstock_($sts,$gol,$kodepro){
     if($sts=="RS"){
       $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisa,"Roll",A.warna');
       $this->db->from("{$this->stock} A");

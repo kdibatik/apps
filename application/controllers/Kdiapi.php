@@ -145,6 +145,7 @@ class KdiApi extends REST_Controller {
             $data["message"] = "User Tidak ditemukan";
             $data["success"] = 0;
         }else{
+
             $data["success"] = 1;
             $data["message"] = "Success Get Order Detail";
         }
