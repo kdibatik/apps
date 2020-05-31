@@ -200,16 +200,16 @@ class KdiModel extends CI_Model
       $this->db->where('A.kodepro', $kodepro);
       $this->db->where('A.sisasls >', 0);
       $this->db->where('A.warna', $warna);
-      $this->db->group_by("A.warna","asc");
-      $this->db->group_by("A.ukuran","desc");
+      $this->db->group_by('A.warna','asc');
+      $this->db->group_by('A.ukuran','desc');
     }elseif($sts=="PS"){
       $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisa,"Roll",A.warna ');
       $this->db->from("{$this->stockpre} A");
       $this->db->where('A.kodepro', $kodepro);
       $this->db->where('A.sisa >', 0);
       $this->db->where('A.warna', $warna);
-      $this->db->group_by("A.warna","asc");
-      $this->db->group_by("A.ukuran","desc");
+      $this->db->group_by('A.warna','asc');
+      $this->db->group_by('A.ukuran','desc');
     }
     $query = $this->db->get();
     return $query->result_array();
