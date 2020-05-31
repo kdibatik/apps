@@ -173,7 +173,7 @@ class KdiModel extends CI_Model
           //$datastc["data"][]["color"]=$row->warna;
           $ambildata=$this->getStockDetail($row->warna,$sts,$kodepro);
           
-          $datastc["data"]=array(
+          $datastc["hasil"]["data"]=array(
             'color'=>$row->warna,
             'dataproduct'=>$ambildata
           );
