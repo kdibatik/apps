@@ -153,12 +153,12 @@ class KdiModel extends CI_Model
   }
 
   public function getstock($sts,$gol,$kodepro){
-      // $data = array();
-      // $datastc=array();
+      //  $hasil = array();
+      //  $warna=array();
       // $datatemp=array();
 
     if ($sts == "RS"){
- 
+      
       $this->db->select('A.warna');
       $this->db->from("{$this->stock} A");
       $this->db->where('A.kodepro', $kodepro);
@@ -173,7 +173,8 @@ class KdiModel extends CI_Model
           //$datastc["data"][]["color"]=$row->warna;
           $ambildata=$this->getStockDetail($row->warna,$sts,$kodepro);
           
-          $datastc["hasil"]["data"]=array(
+
+          $datastc["hasil"][]["data"]=array(
             'color'=>$row->warna,
             'dataproduct'=>$ambildata
           );
