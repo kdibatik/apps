@@ -134,7 +134,7 @@ class KdiModel extends CI_Model
       $this->db->from("{$this->prod} A");
       $this->db->join("{$this->stock} B", 'A.kodepro = B.kodepro');
       $this->db->where('A.nama', $gol);
-      $this->db->where('B.sisa', > 0);
+      $this->db->where('B.sisa >', 0);
       $this->db->group_by("A.kodepro,A.namapro");
 
     }else if($sts =="PS"){
