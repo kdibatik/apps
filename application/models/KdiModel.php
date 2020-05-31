@@ -155,6 +155,7 @@ class KdiModel extends CI_Model
   public function getstock($sts,$gol,$kodepro){
       $data = array();
       $datastc=array();
+      $datatemp=array();
     if ($sts == "RS"){
  
       $this->db->select('A.warna');
@@ -168,11 +169,11 @@ class KdiModel extends CI_Model
         foreach($query->result() as $key=>$item){
          
           $ambildata=$this->getStockDetail($item->warna,$sts,$kodepro);
-         
-          $datastc[$item->warna]=$ambildata;
-          $data = $datastc;
-
+          $datatemp[$item->warna]=$ambildata;
+          
         }
+        $datastc["itemcolor"]=$datatemp;
+        $data = $datastc;
       }
 
     }elseif($sts == "PS"){
@@ -188,11 +189,12 @@ class KdiModel extends CI_Model
         foreach($query->result() as $key=>$item){
          
           $ambildata=$this->getStockDetail($item->warna,$sts,$kodepro);
+          $datatemp[$item->warna]=$ambildata;
+          
 
-          $datastc[$item->warna]=$ambildata;
-          $data = $datastc;
-
-        } 
+        }
+        $datastc["itemcolor"]=$datatemp;
+        $data = $datastc;
       }
     }
     
