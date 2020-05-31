@@ -186,7 +186,7 @@ class KdiModel extends CI_Model
           $ambildata=$this->getStockDetail($item->warna,$sts,$kodepro);
           $datastc[$item->warna]=$ambildata;
           $data = $datastc;
-        }
+        } 
       }
     }
     
