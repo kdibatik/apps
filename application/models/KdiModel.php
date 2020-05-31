@@ -199,7 +199,7 @@ class KdiModel extends CI_Model
       $this->db->from("{$this->stock} A");
       $this->db->where('A.kodepro', $kodepro);
       $this->db->where('A.sisasls >', 0);
-      $this->db->where('A.warna >', $warna);
+      $this->db->where('A.warna', $warna);
       $this->db->group_by("A.warna", "ASC");
       $this->db->group_by("A.ukuran", "DESC");
     }elseif($sts=="PS"){
@@ -207,7 +207,7 @@ class KdiModel extends CI_Model
       $this->db->from("{$this->stockpre} A");
       $this->db->where('A.kodepro', $kodepro);
       $this->db->where('A.sisa >', 0);
-      $this->db->where('A.warna >', $warna);
+      $this->db->where('A.warna', $warna);
       $this->db->group_by("A.warna", "ASC");
       $this->db->group_by("A.ukuran", "DESC");
     }
