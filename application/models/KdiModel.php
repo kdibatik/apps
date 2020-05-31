@@ -195,14 +195,14 @@ class KdiModel extends CI_Model
 
   public function getStockDetail($warna,$sts,$kodepro){
     if($sts=="RS"){
-      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisa,A."Roll",A.warna ');
+      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisa,"Roll",A.warna ');
       $this->db->from("{$this->stock} A");
       $this->db->where('A.kodepro', $kodepro);
       $this->db->where('A.sisasls >', 0);
       $this->db->where('A.warna >', $warna);
       $this->db->group_by("A.warna ASC,A.ukuran DESC");
     }elseif($sts=="PS"){
-      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisa,A."Roll",A.warna ');
+      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisa,"Roll",A.warna ');
       $this->db->from("{$this->stockpre} A");
       $this->db->where('A.kodepro', $kodepro);
       $this->db->where('A.sisa >', 0);
