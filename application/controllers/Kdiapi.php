@@ -149,7 +149,7 @@ class KdiApi extends REST_Controller {
             $data["success"] = 1;
             $data["message"] = "Success Get Order Detail";
         }
-        $data = $sisaProduct;
+        $data["hasil"] = $sisaProduct;
         $this->response($data, REST_Controller::HTTP_OK);
 
     }
