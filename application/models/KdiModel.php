@@ -168,9 +168,9 @@ class KdiModel extends CI_Model
       {
         
         foreach($query->result() as $key=>$item){
-          array_push($datastc["color"], $item->warna);
+          array_push($datastc, $item->warna);
           $ambildata=$this->getStockDetail($item->warna,$sts,$kodepro);
-          array_push($datastc["dataproduct"],$ambildata);
+          $datastc["dataproduct"],$ambildata;
           
         }
        
