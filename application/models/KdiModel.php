@@ -189,6 +189,8 @@ class KdiModel extends CI_Model
         }
        
         $data = $datastc;
+      }else{
+        $data=null;
       }
 
     }elseif($sts == "PS"){
@@ -211,7 +213,9 @@ class KdiModel extends CI_Model
 
         }
         
-        $data = $datastc;
+          $data = $datastc;
+      }else{
+        $data=null;
       }
     }
     
