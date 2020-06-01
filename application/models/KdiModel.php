@@ -164,7 +164,7 @@ class KdiModel extends CI_Model
   }
 
   public function getstock($sts,$gol,$kodepro){
-      //  $hasil = array();
+        $datastc = array();
       //  $warna=array();
       // $datatemp=array();
 
