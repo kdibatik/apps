@@ -32,7 +32,7 @@ class KdiModel extends CI_Model
     return $query->result();
   }
 
-  public funtion getTotalOmset($username){
+  public function getTotalOmset($username){
     $month = date('m');
     $this->db->select('COALESCE(SUM(B.grandtotal),0) as ttl');
     $this->db->from("{$this->user} A");
