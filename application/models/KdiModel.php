@@ -22,8 +22,19 @@ class KdiModel extends CI_Model
   }
 
   public function getProfileData ($username){
+    
+    $this->db->select('A.username,A.laveluser,A.name,A.email,A.idgoogle,A.picture');
+    $this->db->from("{$this->user} A");
+    $this->db->join("{$this->soh} B", 'A.username = B.sales','left');
+    $this->db->where('A.email', $username);
+    // $this->db->where('Month(B.tgl)', $month);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  public funtion getTotalOmset($username){
     $month = date('m');
-    $this->db->select('A.username,A.laveluser,A.name,A.email,A.idgoogle,A.picture,SUM(B.grandtotal) as ttl');
+    $this->db->select('COALESCE(SUM(B.grandtotal),0) as ttl');
     $this->db->from("{$this->user} A");
     $this->db->join("{$this->soh} B", 'A.username = B.sales','left');
     $this->db->where('A.email', $username);
