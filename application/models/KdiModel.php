@@ -203,10 +203,9 @@ class KdiModel extends CI_Model
         
         foreach($query->result() as $key=>$item){
          
-          $ambildata=$this->getStockDetail($item->warna,$sts,$kodepro);
-          // $datatemp[$item->warna]=$ambildata;
-          $datastc["hasil"][]=array(
-            'color'=>$row->warna,
+          $ambildata=$this->getStockDetail($row->warna,$sts,$kodepro);
+          $datastc["data"][]=array(
+            'warna'=>$row->warna,
             'dataproduct'=>$ambildata
           );
 
@@ -229,7 +228,7 @@ class KdiModel extends CI_Model
       // $this->db->group_by('A.warna','asc');
       $this->db->group_by('A.ukuran','desc');
     }elseif($sts=="PS"){
-      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisa,"Roll",A.warna ');
+      $this->db->select('A.kodepro,A.sisa,A.unitqty,A.warna ');
       $this->db->from("{$this->stockpre} A");
       $this->db->where('A.kodepro', $kodepro);
       $this->db->where('A.sisa >', 0);
