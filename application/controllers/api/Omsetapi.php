@@ -10,7 +10,7 @@ class OmsetApi extends REST_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->model("Kdimodel","OmsetModel");
+        $this->load->model("OmsetModel","Kdimodel");
        
     }
 
