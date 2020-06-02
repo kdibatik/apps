@@ -10,8 +10,8 @@ class SoApi extends REST_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->model("SoModel","SoModel");
-       
+        $this->load->model("Kdimodel","SoModel");
+   
     }
 
     public function getdetailOrder_post(){
