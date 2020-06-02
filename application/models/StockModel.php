@@ -74,7 +74,7 @@ class StockModel extends CI_Model
       
       $this->db->select('A.warna');
       $this->db->from("{$this->stock} A");
-      $this->db->where('A.kodepro', $kodepro);
+      $this->db->like('A.kodepro', $kodepro);
       $this->db->group_by("A.warna");
       $query = $this->db->get();
       if(!empty($query))
@@ -99,7 +99,7 @@ class StockModel extends CI_Model
 
       $this->db->select('A.warna');
       $this->db->from("{$this->stockpre} A");
-      $this->db->where('A.kodepro', $kodepro);
+      $this->db->like('A.kodepro', $kodepro);
       $this->db->group_by("A.warna");
       $query = $this->db->get();
       if(!empty($query))
