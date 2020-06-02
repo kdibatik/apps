@@ -10,7 +10,7 @@ class StockApi extends REST_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->model("Kdimodel","StockModel");
+        $this->load->model("StockModel","Kdimodel");
        
     }
 
