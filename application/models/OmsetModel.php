@@ -60,7 +60,7 @@ class OmsetModel extends CI_Model
     $this->db->from("{$this->soh} A");
     $this->db->join("{$this->user} C", "A.sales = C.username");
     $this->db->where("C.email", $username);
-    $this->db->where('date BETWEEN "'. date('Y-m-d', strtotime($first_day_this_year)). '" and "'. date('Y-m-d', strtotime($last_day_this_year)).'"');
+    $this->db->where('A.tgl BETWEEN "'. date('Y-m-d', strtotime($first_day_this_year)). '" and "'. date('Y-m-d', strtotime($last_day_this_year)).'"');
     $this->db->group_by("DATE_FORMAT(A.tgl,'%M')","A.sales");
     $this->db->order_by("DATE_FORMAT(A.tgl,'%M')");
     $query = $this->db->get();
