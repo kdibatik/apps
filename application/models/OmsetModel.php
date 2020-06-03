@@ -67,4 +67,17 @@ class OmsetModel extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
+
+
+  public function getOmsetMonth($username,$bln){
+    $this->db->select("B.kodecst,B.perusahaan,SUM(A.grandtotal) AS ttl");
+    $this->db->from("{$this->soh} A");
+    $this->db->join("{$this->cst} B", "A.cst = B.kodecst");
+    $this->db->join("{$this->user} C", "A.sales = C.username");
+    $this->db->where("month(A.tgl)", $bln);
+    $this->db->where("C.email", $username);
+    $this->db->group_by("B.perusahaan");
+    $query = $this->db->get();
+    return $query->result();
+  }
 }

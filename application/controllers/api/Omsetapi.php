@@ -87,4 +87,23 @@ class OmsetApi extends REST_Controller {
         $this->response($data, REST_Controller::HTTP_OK);
 
     }
+
+    public function getomsetmonth_post(){
+
+        $username = $this->post("username");
+        $bln=$this->post("bln");
+        $omsetData = $this->Kdimodel->getOmsetMonth($username,$bln);
+        
+        if (count($omsetData) == 0) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Get Profile";
+        }
+           
+        $data["data"] = $omsetData;
+        $this->response($data, REST_Controller::HTTP_OK);
+
+    }
 }
