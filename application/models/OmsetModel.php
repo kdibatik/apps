@@ -52,12 +52,12 @@ class OmsetModel extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
-  
+
 
   public function getOmsetYear ($username){
     $first_day_this_year = date('Y-01-01');
     $last_day_this_year = date('Y-12-31');
-    $this->db->select("DATE_FORMAT(A.tgl,'%M') as bulan,sum(A.grandtotal) as ttl");
+    $this->db->select("month(A.tgl) as bln,DATE_FORMAT(A.tgl,'%M') as bulan,sum(A.grandtotal) as ttl");
     $this->db->from("{$this->soh} A");
     $this->db->join("{$this->user} C", "A.sales = C.username");
     $this->db->where("C.email", $username);
