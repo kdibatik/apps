@@ -89,7 +89,7 @@ class OmsetModel extends CI_Model
     $this->db->where("month(A.tgl)", $bln);
     $this->db->where("C.email", $username);
     $this->db->where("A.cst", $cst);  
-    $this->db->order_by("A.tgl",DESC);
+    $this->db->order_by("A.tgl","DESC");
     $query = $this->db->get();
     return $query->result();
   }
