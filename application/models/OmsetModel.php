@@ -55,7 +55,7 @@ class OmsetModel extends CI_Model
 
   public function getOmsetYear ($username){
     $first_day_this_year = date('Y-01-01');
-    $last_day_this_year = data('Y-12-31');
+    $last_day_this_year = date('Y-12-31');
     $this->db->select("DATE_FORMAT(A.tgl,'%M') as bulan,sum(A.grandtotal) as ttl");
     $this->db->from("{$this->soh} A");
     $this->db->join("{$this->user} C", "A.sales = C.username");
