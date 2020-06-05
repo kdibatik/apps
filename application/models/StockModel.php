@@ -43,12 +43,14 @@ class StockModel extends CI_Model
   public function getproductwarna($sts,$gol){
     if($sts =="RS"){
       
-      $this->db->select('A.kodepro,count(B.kodepro) as warna');
-      $this->db->from("{$this->prod} A");
-      $this->db->join("{$this->stock} B", 'A.kodepro = B.kodepro');
-      $this->db->where('A.gol', $gol);
-      $this->db->where('B.sisasls >', 0);
-      $this->db->group_by("A.kodepro,A.namapro");
+      $this->db->select('A.kodepro,A.warna,COUNT(A.ukuran) AS ukr')
+      //$this->db->select('A.kodepro,count(B.kodepro) as warna');
+      $this->db->from("{$this->stock} A");
+      $this->db->join("{$this->prod} B", 'A.kodepro = B.kodepro');
+      $this->db->join("{$this->golstock} C", 'B.gol = C.id');
+      $this->db->where('C.id', $gol);
+      $this->db->where('A.sisasls >', 0);
+      $this->db->group_by("A.kodepro,A.warna");
 
     }else if($sts =="PS"){
      
