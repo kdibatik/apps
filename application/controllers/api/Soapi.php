@@ -37,7 +37,6 @@ class SoApi extends REST_Controller {
     public function getcustomer_post(){
         $username = $this->post("username");
 
-
         $omsetData = $this->Kdimodel->getCustomer($username);
         
         if (count($omsetData) == 0) {
@@ -46,6 +45,25 @@ class SoApi extends REST_Controller {
         }else{
             $data["success"] = 1;
             $data["message"] = "Success Get Customer Detail";
+        }
+           
+        $data["data"] = $omsetData;
+        $this->response($data, REST_Controller::HTTP_OK);
+    }
+
+    public function getsofilter_post(){
+        $cst = $this->post("cst");
+        $fromdate = $this->post("fromdate");
+        $todate = $this->post("todate");
+        $username = $this->post("username");
+        $omsetData = $this->Kdimodel->getfilter($cst,$fromdate,$todate,$username);
+        
+        if (count($omsetData) == 0) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Filter Omset Detail";
         }
            
         $data["data"] = $omsetData;
