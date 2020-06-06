@@ -18,9 +18,6 @@ class SoApi extends REST_Controller {
 
         $username = $this->post("username");
         $noso = $this->post("noso");
-            // echo "<pre>";
-            // print_r($ket);
-            // echo "</pre>";
 
         $omsetData = $this->Kdimodel->getOrderHeader($username,$noso);
         
@@ -35,5 +32,23 @@ class SoApi extends REST_Controller {
         $data["data"] = $omsetData;
         $this->response($data, REST_Controller::HTTP_OK);
 
+    }
+
+    public function getcustomer_post(){
+        $username = $this->post("username");
+
+
+        $omsetData = $this->Kdimodel->getCustomer($username);
+        
+        if (count($omsetData) == 0) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Get Customer Detail";
+        }
+           
+        $data["data"] = $omsetData;
+        $this->response($data, REST_Controller::HTTP_OK);
     }
 }

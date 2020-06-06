@@ -61,4 +61,13 @@ class SoModel extends CI_Model
     $query = $this->db->get();
     return $query->result_array();
   }
+
+  public function getCustomer($username){
+    $this->db->select('A.kodecst,A.perusahaan');
+    $this->db->from("{$this->cst} A");
+    $this->db->join("{$this->user} B", 'A.sls = B.username');
+    $this->db->where('B.email', $username);
+    $query = $this->db->get();
+    return $query->result_array();
+  }
 }
