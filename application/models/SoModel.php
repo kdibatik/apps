@@ -72,8 +72,8 @@ class SoModel extends CI_Model
   }
 
   public function getfilter($cst,$fromdate,$todate,$username){
-    $datritgl=date($fromdate);
-    $smptgl=date($todate);
+    $datritgl=date('Y-m-d',$fromdate);
+    $smptgl=date('Y-m-d',$todate);
     print_r($datritgl);
     $this->db->select("B.perusahaan,A.noso,A.tgl,A.grandtotal,A.stsapprove");
     $this->db->from("{$this->soh} A");
