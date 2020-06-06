@@ -72,14 +72,12 @@ class SoModel extends CI_Model
   }
 
   public function getfilter($cst,$fromdate,$todate,$username){
-    $datritgl=date('Y-m-d',$fromdate);
-    $smptgl=date('Y-m-d',$todate);
-    print_r($datritgl);
+
     $this->db->select("B.perusahaan,A.noso,A.tgl,A.grandtotal,A.stsapprove");
     $this->db->from("{$this->soh} A");
     $this->db->join("{$this->cst} B", "A.cst = B.kodecst");
     $this->db->join("{$this->user} C", "A.sales = C.username");
-    $this->db->where('A.tgl BETWEEN "'. date('Y-m-d', strtotime($datritgl)). '" and "'. date('Y-m-d', strtotime($smptgl)).'"');
+    $this->db->where('A.tgl BETWEEN "'. date('Y-m-d', strtotime($fromdate)). '" and "'. date('Y-m-d', strtotime($todate)).'"');
     $this->db->where("C.email", $username);
     $this->db->where("A.cst", $cst);  
     $this->db->order_by("A.tgl","DESC");
