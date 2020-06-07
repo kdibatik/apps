@@ -98,19 +98,19 @@ class SoApi extends REST_Controller {
 
             $omsetData = $this->Kdimodel->saveordermodel($data,$stsstc);
             if (!$omsetData) {
-                $data["message"] = "User Tidak ditemukan";
-                $data["success"] = 0;
+                $hasil["message"] = "User Tidak ditemukan";
+                $hasil["success"] = 0;
             }else{
-                $data["success"] = 1;
-                $data["message"] = "Success Filter Omset Detail";
+                $hasil["success"] = 1;
+                $hasil["message"] = "Success Filter Omset Detail";
             }
                
         }else{
-            $data["message"] = "Update Error";
-            $data["success"] = 0;
+            $hasil["message"] = "Update Error";
+            $hasil["success"] = 0;
         }
 
-        $this->response($data, REST_Controller::HTTP_OK);
+        $this->response($hasil, REST_Controller::HTTP_OK);
     }
 
 }
