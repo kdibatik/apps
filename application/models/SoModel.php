@@ -91,8 +91,29 @@ class SoModel extends CI_Model
     // Return the id of inserted row
     //return $idOfInsertedData = $this->db->insert_id();
     // kurangi stock
+    $datastc = [
+      'sisasls' => 'Joe',
+    ];
+  $this->db->trans_begin();
+  $this->db->set('sisasls', 'sisasls-'.$data["qty"], FALSE);
+  $this->db->where('kodepro', $data["kodepro"]);
+  $this->db->update('stock');
+  if ($this->db->trans_status() === FALSE)//checks transaction status
+    {
+        $this->db->trans_rollback();//if update fails rollback and  return false
+       return FALSE;
 
-    print_r($data["kodepro"]);
+    }
+    else
+    {
+        $this->db->trans_commit();//if success commit transaction and returns true
+        if($this->db->insert('tempso_d', $data)){
+          return TRUE;
+        }else{
+          return FALSE;
+        }
+        
+    }
 
   }
 }
