@@ -69,4 +69,50 @@ class SoApi extends REST_Controller {
         $data["data"] = $omsetData;
         $this->response($data, REST_Controller::HTTP_OK);
     }
+
+    public function saveorder_post(){
+        // username,ppn,note,ref,term
+        // username,kodepro,warna,ukuran,unitqty,qty,unit,price
+        $username = $this->post("username");
+        $kodepro=$this->post("kodepro");
+        $warna=$this->post("warna");
+        $ukuran=$this->post("ukuran");
+        $unitqty=$this->post("unitqty");
+        $qty=$this->post("qty");
+        $unit=$this->post("unit");
+        $price=$this->post("price");
+        $stsstc=$this->post("stsstc")
+
+        if ($username && $kodepro && $warna && $ukuran && $unitqty && $qty && $unit && $price) {
+
+            $data = array(
+                'username' => $username,
+                'kodepro' => $kodepro,
+                'warna' => $warna,
+                'ukuran' => $ukuran,
+                'unitqty' => $unitqty,
+                'qty' => $qty,
+                'unit' => $unit,
+                'price' => $price
+            );
+
+            $omsetData = $this->Kdimodel->saveordermodel($data,$stsstc);
+            if (count($omsetData) == 0) {
+                $data["message"] = "User Tidak ditemukan";
+                $data["success"] = 0;
+            }else{
+                $data["success"] = 1;
+                $data["message"] = "Success Filter Omset Detail";
+            }
+               
+            $data["data"] = $omsetData;
+            
+        }else{
+            $data["message"] = "Update Error";
+            $data["success"] = 0;
+        }
+
+        $this->response($data, REST_Controller::HTTP_OK);
+    }
+
 }

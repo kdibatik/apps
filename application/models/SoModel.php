@@ -84,4 +84,15 @@ class SoModel extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
+
+  public function saveordermodel($data,$stsdata){
+    //save ke table tempso_d
+    //$this->db->insert('tempso_d', $data);
+    // Return the id of inserted row
+    //return $idOfInsertedData = $this->db->insert_id();
+    // kurangi stock
+
+    print_r($data["kodepro"]);
+
+  }
 }
