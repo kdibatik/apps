@@ -83,7 +83,7 @@ class SoApi extends REST_Controller {
         $price=$this->post("price");
         $stsstc=$this->post("stsstc")
 
-        if ($username && $kodepro && $warna && $ukuran && $unitqty && $qty && $unit && $price) {
+        if ($username!="" && $kodepro!="" && $warna!="" && $ukuran!="" && $unitqty!="" && $qty!="" && $unit!="" && $price!="") {
 
             $data = array(
                 'username' => $username,
