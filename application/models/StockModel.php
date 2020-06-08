@@ -128,7 +128,7 @@ class StockModel extends CI_Model
 
   public function getStockDetail($warna,$sts,$kodepro){
     if($sts=="RS"){
-      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisasls,"Roll",A.warna ');
+      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisasls as sisa,"Roll",A.warna ');
       $this->db->from("{$this->stock} A");
       $this->db->like('A.kodepro', $kodepro);
       $this->db->where('A.sisasls >', 0);
@@ -149,7 +149,7 @@ class StockModel extends CI_Model
 
   public function getstock_($sts,$gol,$kodepro){
     if($sts=="RS"){
-      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisasls,"Roll",A.warna');
+      $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisasls as sisa,"Roll",A.warna');
       $this->db->from("{$this->stock} A");
       $this->db->where('A.kodepro', $kodepro);
       $this->db->where('A.sisasls >', 0);
