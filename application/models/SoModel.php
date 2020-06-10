@@ -106,15 +106,17 @@ class SoModel extends CI_Model
 
     }
     else
-    {
+    {   
+        
         //if success commit transaction and returns true
         $this->db->insert('tempso_d', $data);
         if($this->db->affected_rows() > 0){
+          $this->db->trans_commit();
           return TRUE;
         }else{
           return FALSE;
         }
-        $this->db->trans_commit();
+       
     }
 
   }
