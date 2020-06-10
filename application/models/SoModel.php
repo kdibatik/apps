@@ -149,7 +149,8 @@ class SoModel extends CI_Model
   public function getorderrs($username){
     $this->db->select("A.id,A.kodepro,A.warna,A.ukuran,A.unitqty,A.qty,A.unit,A.price,A.note");
     $this->db->from("{$this->orderrs_d} A");
-    $this->db->where("A.username", $username); 
+    $this->db->where("A.username", $username);
+    $this->db->where("A.noso","0"); 
     $this->db->order_by("A.warna","DESC");
     $query = $this->db->get();
     return $query->result();
