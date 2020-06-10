@@ -85,7 +85,7 @@ class SoModel extends CI_Model
     return $query->result();
   }
 
-  public function saveordermodel($data,$stsdata){
+  public function saveordermodelrs($data){
     //save ke table tempso_d
     //$this->db->insert('tempso_d', $data);
     // Return the id of inserted row
@@ -93,8 +93,11 @@ class SoModel extends CI_Model
     // kurangi stock
 
   $this->db->trans_begin();
-  $this->db->set('sisasls', 'sisasls-'.$data["qty"], FALSE);
+  $this->db->set('sisasls', 'sisasls -'.$data["qty"], FALSE);
+  $this->db->set('booking', 'booking +'.$data["qty"], FALSE);
   $this->db->where('kodepro', $data["kodepro"]);
+  $this->db->where('ukuran', $data["ukuran"]);
+  $this->db->where('warna', $data["warna"]);
   $this->db->update('stock');
   if ($this->db->trans_status() === FALSE)//checks transaction status
     {
@@ -106,6 +109,31 @@ class SoModel extends CI_Model
     {
         $this->db->trans_commit();//if success commit transaction and returns true
         if($this->db->insert('tempso_d', $data)){
+          return TRUE;
+        }else{
+          return FALSE;
+        }
+        
+    }
+
+  }
+  public function saveordermodelps($data){
+  $this->db->trans_begin();
+  $this->db->set('sisa', 'sisa -'.$data["qty"], FALSE);
+  $this->db->set('qtytrm', 'qtytrm +'.$data["qty"], FALSE);
+  $this->db->where('kodepro', $data["kodepro"]);
+  $this->db->where('warna', $data["warna"]);
+  $this->db->update('stcokpre');
+  if ($this->db->trans_status() === FALSE)//checks transaction status
+    {
+        $this->db->trans_rollback();//if update fails rollback and  return false
+       return FALSE;
+
+    }
+    else
+    {
+        $this->db->trans_commit();//if success commit transaction and returns true
+        if($this->db->insert('tempsops_d', $data)){
           return TRUE;
         }else{
           return FALSE;

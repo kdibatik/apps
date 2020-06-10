@@ -70,7 +70,7 @@ class SoApi extends REST_Controller {
         $this->response($data, REST_Controller::HTTP_OK);
     }
 
-    public function saveorder_post(){
+    public function saveorderrs_post(){
         // username,ppn,note,ref,term
         // username,kodepro,warna,ukuran,unitqty,qty,unit,price
         $username = $this->post("username");
@@ -81,7 +81,7 @@ class SoApi extends REST_Controller {
         $qty=$this->post("qty");
         $unit=$this->post("unit");
         $price=$this->post("price");
-        $stsstc=$this->post("stsstc");
+        //$stsstc=$this->post("stsstc");
 
         if($username!="" && $kodepro!="" && $warna!="" && $ukuran!="" && $unitqty!="" && $qty!="" && $unit!="" && $price!=""){
 
@@ -96,7 +96,7 @@ class SoApi extends REST_Controller {
                 'price' => $price
             );
 
-            $omsetData = $this->Kdimodel->saveordermodel($data,$stsstc);
+            $omsetData = $this->Kdimodel->saveordermodelrs($data);
             if (!$omsetData) {
                 $hasil["message"] = "Something Wrong";
                 $hasil["success"] = 0;
@@ -113,4 +113,42 @@ class SoApi extends REST_Controller {
         $this->response($hasil, REST_Controller::HTTP_OK);
     }
 
+    public function saveorderps_post(){
+        // username,ppn,note,ref,term
+        // username,kodepro,warna,ukuran,unitqty,qty,unit,price
+        $username = $this->post("username");
+        $kodepro=$this->post("kodepro");
+        $warna=$this->post("warna");
+        $unitqty=$this->post("unitqty");
+        $qty=$this->post("qty");
+        $price=$this->post("price");
+        //$stsstc=$this->post("stsstc");
+
+        if($username!="" && $kodepro!="" && $warna!="" && $unitqty!="" && $qty!="" && $price!=""){
+
+            $data = array(
+                'username' => $username,
+                'kodepro' => $kodepro,
+                'warna' => $warna,
+                'unitqty' => $unitqty,
+                'qty' => $qty,
+                'price' => $price
+            );
+
+            $omsetData = $this->Kdimodel->saveordermodelps($data);
+            if (!$omsetData) {
+                $hasil["message"] = "Something Wrong";
+                $hasil["success"] = 0;
+            }else{
+                $hasil["success"] = 1;
+                $hasil["message"] = "Success Add To Cart";
+            }
+               
+        }else{
+            $hasil["message"] = "Update Error";
+            $hasil["success"] = 0;
+        }
+
+        $this->response($hasil, REST_Controller::HTTP_OK);
+    }
 }
