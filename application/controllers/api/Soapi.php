@@ -168,4 +168,39 @@ class SoApi extends REST_Controller {
         $data["data"] = $omsetData;
         $this->response($data, REST_Controller::HTTP_OK);
     }
+
+    public function delorderrs_post(){
+
+        $username = $this->post("username");
+        $omsetData = $this->Kdimodel->delorderrs($username);
+        
+        if (!$omsetData) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Delete Order";
+        }
+           
+        $data["data"] = $omsetData;
+        $this->response($data, REST_Controller::HTTP_OK);
+    }
+
+    public function deldetailorderrs_post(){
+
+        $username = $this->post("username");
+        $iddata=$this->post("iddata")
+        $omsetData = $this->Kdimodel->deldetailorderrs($username,$iddata);
+        
+        if (!$omsetData) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Delete Order Detail";
+        }
+           
+        $data["data"] = $omsetData;
+        $this->response($data, REST_Controller::HTTP_OK);
+    }
 }

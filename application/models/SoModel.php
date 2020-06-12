@@ -155,4 +155,38 @@ class SoModel extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
+
+  public function delorderrs($username){
+  $this->db->trans_begin();
+  $this->db->where('username', $username);
+  $this->db->delete('tempso_d');
+    if($this->db->affected_rows()){
+      $this->db->where('username',$username);
+      $this->db->delete('tempso_h');
+      if($this->db->affected_rows()){
+        $this->db->trans_commit();
+        return true;
+      }else{
+       
+        $this->db->trans_rollback();
+        return false;
+      }
+    }
+    else{
+      $this->db->trans_rollback();
+      return false;
+    }
+  }
+
+  public function deldetailorderrs($username,$iddata){
+    $this->db->where('username', $username);
+    $this->db->where('id', $iddata);
+    $this->db->delete('tempso_d');
+    if($this->db->affected_rows()){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }
