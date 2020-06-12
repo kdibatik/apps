@@ -194,6 +194,7 @@ class SoModel extends CI_Model
     }
       if(!empty($query))
       {
+        cekpoin=false;
         $this->db->trans_begin();
         foreach($query->result() as $key=>$item){
           $this->db->set('sisasls', 'sisasls +'.$item->qty, FALSE);
@@ -209,19 +210,41 @@ class SoModel extends CI_Model
             }
             else
             {   
-              $this->db->where('username', $username);
-              $this->db->where('id', $iddata);
-              $this->db->delete('tempso_d');
-              $this->db->affected_rows();
-              if ($this->db->trans_status() === FALSE){
-                //update stock
+              // $this->db->where('username', $username);
+              // $this->db->where('id', $iddata);
+              // $this->db->delete('tempso_d');
+              // $this->db->affected_rows();
+              // if ($this->db->trans_status() === FALSE){
+              //   //update stock
+              //   $this->db->trans_rollback();
+              // }
+              if($idstsdel == 1){
+                $result = $this->db
+                ->where('username', $username)
+                ->where('id', $iddata)
+                ->delete('tempso_d');
+              }else{
+                  $result = $this->db
+                  ->where('username', $username)
+                  ->delete('tempso_d');
+              }
+              
+              if($result === false){
                 $this->db->trans_rollback();
+                cekpoin=true;
+                break;
               }
              
             }
         }
-        $this->db->trans_commit();
-        return true;
+
+        if(cekpoin=true){
+          return false;
+        }else{
+           $this->db->trans_commit();
+          return true;
+        }
+       
   }else{
     return false;
   }
