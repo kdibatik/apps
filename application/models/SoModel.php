@@ -194,7 +194,7 @@ class SoModel extends CI_Model
     }
       if(!empty($query))
       {
-        cekpoin=false;
+        $cekpoin = false;
         $this->db->trans_begin();
         foreach($query->result() as $key=>$item){
           $this->db->set('sisasls', 'sisasls +'.$item->qty, FALSE);
@@ -231,14 +231,14 @@ class SoModel extends CI_Model
               
               if($result === false){
                 $this->db->trans_rollback();
-                cekpoin=true;
+                $cekpoin = true;
                 break;
               }
              
             }
         }
 
-        if(cekpoin=true){
+        if($cekpoin === true){
           return false;
         }else{
            $this->db->trans_commit();
