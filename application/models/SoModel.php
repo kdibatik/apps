@@ -179,14 +179,42 @@ class SoModel extends CI_Model
   }
 
   public function deldetailorderrs($username,$iddata){
-    $this->db->where('username', $username);
-    $this->db->where('id', $iddata);
-    $this->db->delete('tempso_d');
-    if($this->db->affected_rows()){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
+    
+    $this->db->select('A.kodecst,A.ukuran,A.warna,A.id,A.qty');
+    $this->db->from("{$this->orderrs_d} A");
+    $this->db->where('A.id', $iddata);
+    $this->db->where('A.username', $username);
+    $query = $this->db->get();
+      if(!empty($query))
+      {
+        $this->db->trans_begin();
+        foreach($query->result() as $key=>$item){
+          $this->db->set('sisasls', 'sisasls +'.$item->qty, FALSE);
+          $this->db->set('booking', 'booking -'.$item->qty, FALSE);
+          $this->db->where('kodepro', $item->kodepro["kodepro"]);
+          $this->db->where('ukuran', $item->ukuran);
+          $this->db->where('warna', $item->warna);
+          $this->db->update('stock');
+          if ($this->db->trans_status() === FALSE)//checks transaction status
+            {
+              $this->db->trans_rollback();//if update fails rollback and  return false
+               return FALSE;
+            }
+            else
+            {   
+              $this->db->where('username', $username);
+              $this->db->where('id', $iddata);
+              $this->db->delete('tempso_d');
+              if($this->db->affected_rows()){
+                //update stock
+                $this->db->trans_commit();
+                return true;
+              }
+              else{
+                return false;
+              }
+             
+            }
+        }
+  }else{return false}
 }
