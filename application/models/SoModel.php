@@ -180,7 +180,7 @@ class SoModel extends CI_Model
 
   public function deldetailorderrs($username,$iddata){
     
-    $this->db->select('A.kodecst,A.ukuran,A.warna,A.id,A.qty');
+    $this->db->select('A.kodepro,A.ukuran,A.warna,A.id,A.qty');
     $this->db->from("{$this->orderrs_d} A");
     $this->db->where('A.id', $iddata);
     $this->db->where('A.username', $username);
@@ -191,7 +191,7 @@ class SoModel extends CI_Model
         foreach($query->result() as $key=>$item){
           $this->db->set('sisasls', 'sisasls +'.$item->qty, FALSE);
           $this->db->set('booking', 'booking -'.$item->qty, FALSE);
-          $this->db->where('kodepro', $item->kodepro["kodepro"]);
+          $this->db->where('kodepro', $item->kodepro);
           $this->db->where('ukuran', $item->ukuran);
           $this->db->where('warna', $item->warna);
           $this->db->update('stock');
