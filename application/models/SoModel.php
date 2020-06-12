@@ -220,3 +220,4 @@ class SoModel extends CI_Model
     return false;
   }
 }
+}
