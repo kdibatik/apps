@@ -189,7 +189,7 @@ class SoApi extends REST_Controller {
     public function deldetailorderrs_post(){
 
         $username = $this->post("username");
-        $iddata=$this->post("iddata")
+        $iddata=$this->post("iddata");
         $omsetData = $this->Kdimodel->deldetailorderrs($username,$iddata);
         
         if (!$omsetData) {
