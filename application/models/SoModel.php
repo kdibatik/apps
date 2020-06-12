@@ -216,5 +216,7 @@ class SoModel extends CI_Model
              
             }
         }
-  }else{return false}
+  }else{
+    return false;
+  }
 }
