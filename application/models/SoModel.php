@@ -205,17 +205,16 @@ class SoModel extends CI_Model
               $this->db->where('username', $username);
               $this->db->where('id', $iddata);
               $this->db->delete('tempso_d');
-              if($this->db->affected_rows()){
+              // if($this->db->affected_rows()){
+              if ($this->db->trans_status() === FALSE){
                 //update stock
-                $this->db->trans_commit();
-                return true;
-              }
-              else{
-                return false;
+                $this->db->trans_rollback();
               }
              
             }
         }
+        $this->db->trans_commit();
+        return true;
   }else{
     return false;
   }
