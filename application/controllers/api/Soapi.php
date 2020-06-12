@@ -190,7 +190,8 @@ class SoApi extends REST_Controller {
 
         $username = $this->post("username");
         $iddata=$this->post("iddata");
-        $omsetData = $this->Kdimodel->deldetailorderrs($username,$iddata);
+        $idstsdel=$this->post("idstsdel"); // ini menandakan del 1 item /del semuanya 1 untuk 1 item 0 untuk semua item
+        $omsetData = $this->Kdimodel->deldetailorderrs($username,$iddata,$idstsdel);
         
         if (!$omsetData) {
             $data["message"] = "User Tidak ditemukan";

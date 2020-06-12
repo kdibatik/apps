@@ -178,13 +178,20 @@ class SoModel extends CI_Model
     }
   }
 
-  public function deldetailorderrs($username,$iddata){
+  public function deldetailorderrs($username,$iddata,$idstsdel){
     
-    $this->db->select('A.kodepro,A.ukuran,A.warna,A.id,A.qty');
-    $this->db->from("{$this->orderrs_d} A");
-    $this->db->where('A.id', $iddata);
-    $this->db->where('A.username', $username);
-    $query = $this->db->get();
+    if($idstsdel == 1){
+      $this->db->select('A.kodepro,A.ukuran,A.warna,A.id,A.qty');
+      $this->db->from("{$this->orderrs_d} A");
+      $this->db->where('A.id', $iddata);
+      $this->db->where('A.username', $username);
+      $query = $this->db->get();
+    }esle{
+      $this->db->select('A.kodepro,A.ukuran,A.warna,A.id,A.qty');
+      $this->db->from("{$this->orderrs_d} A");
+      $this->db->where('A.username', $username);
+      $query = $this->db->get();
+    }
       if(!empty($query))
       {
         $this->db->trans_begin();
