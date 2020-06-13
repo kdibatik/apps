@@ -156,7 +156,7 @@ class SoApi extends REST_Controller {
 
         $username = $this->post("username");
         $omsetData = $this->Kdimodel->getorderrs($username);
-        
+        $gettotal =$this->Kdimodel->getorderrstotal($username);
         if (count($omsetData) == 0) {
             $data["message"] = "User Tidak ditemukan";
             $data["success"] = 0;
@@ -166,6 +166,7 @@ class SoApi extends REST_Controller {
         }
            
         $data["data"] = $omsetData;
+        $data["total"]=$gettotal;
         $this->response($data, REST_Controller::HTTP_OK);
     }
 

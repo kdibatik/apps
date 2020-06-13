@@ -155,6 +155,14 @@ class SoModel extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
+  public function getorderrstotal($username){
+    $this->db->select("(sum(A.price * A.qty * A.ukuran)) as total");
+    $this->db->from("{$this->orderrs_d} A");
+    $this->db->where("A.username", $username);
+    $this->db->where("A.noso","0"); 
+    $query = $this->db->get();
+    return $query->result();
+  }
 
   public function delorderrs($username){
   $this->db->trans_begin();
