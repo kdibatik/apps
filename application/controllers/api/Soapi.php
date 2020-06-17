@@ -231,7 +231,7 @@ class SoApi extends REST_Controller {
         
         if($username!="" && $term!="" && $cst!=""){
 
-            $data = array(
+            $datasave = array(
                 'username' => $username,
                 'term' => $term,
                 'note' => $note,
@@ -242,8 +242,8 @@ class SoApi extends REST_Controller {
                 'noso' => $noso,
             );
 
-        print_r($data)
-        $omsetData = $this->Kdimodel->submitorderrs($username,$data,$noso);
+        print_r($datasave)
+        $omsetData = $this->Kdimodel->submitorderrs($username,$datasave,$noso);
         
         if (!$omsetData) {
             $data["message"] = "User Tidak ditemukan";
