@@ -207,7 +207,7 @@ class SoApi extends REST_Controller {
     }
 
     public function submitorderrstemp_post(){
-        $date = new DateTime(date('Y-m-d H:i:s');
+        $date = new DateTime(date('Y-m-d H:i:s'));
         $username = $this->post("username");
         $term= $this->post("term");
         $note= $this->post("note");
