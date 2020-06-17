@@ -209,8 +209,38 @@ class SoApi extends REST_Controller {
     public function submitorderrstemp_post(){
         
         $username = $this->post("username");
+        $term= $this->post("term");
+        $note= $this->post("note");
+        $cst= $this->post("cst");
+        $ref= $this->post("ref");
+        $ppn=$this->post("ppn");
+
+        $surfixnoso=date('yy') & date('mm');
+        $cekmax=$this->Kdimodel->getmaxdata();
+        print_r($cekmax["noso"]);
+        if($cekmax["noso"]!=null){
+            if($cekmax["noso"] > ($surfixnoso * 1000) + 1){
+                $noso=$cekmax["noso"] + 1;
+            }else{
+                $noso=($surfixnoso * 1000) + 1;
+            }
+        }
+
+        if($username!="" && $term!="" && $cst!=""){
+
+            $data = array(
+                'username' => $username,
+                'term' => $term,
+                'note' => $note,
+                'cst' => $cst,
+                'ref' => $ref,
+                'ppn' => $ppn,
+                'tgl' =>date(),
+                'noso' => $noso,
+            );
+
         
-        $omsetData = $this->Kdimodel->submitorderrs($username,$iddata,$idstsdel);
+        $omsetData = $this->Kdimodel->submitorderrs($username,$data,$noso);
         
         if (!$omsetData) {
             $data["message"] = "User Tidak ditemukan";

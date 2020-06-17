@@ -146,6 +146,31 @@ class SoModel extends CI_Model
 
   }
 
+  public function getmaxdata(){
+    $this->db->select("MAX(noso) as noso");
+    $this->db->from("tempso_h");
+    $query = $this->db->get();
+    return $query->row_result();
+  }
+
+  public function submitorderrs($username,$data,$noso){
+    $this->db->trans_begin();
+    if($this->db->insert('tempsops_h', $data)){
+
+      $this->db->set('noso', $noso, FALSE);
+      $this->db->where('noso', 0);
+      $this->db->where('username', $username);
+      $this->db->update('tempso_d');
+
+      $this->db->trans_commit();
+      return true;
+    }else{
+      $this->db->trans_rollback();
+      return false;
+    }
+
+  }
+
   public function getorderrs($username){
     $this->db->select("A.id,A.kodepro,A.warna,A.ukuran,A.unitqty,A.qty,A.unit,A.price,A.note");
     $this->db->from("{$this->orderrs_d} A");
@@ -257,4 +282,5 @@ class SoModel extends CI_Model
     return false;
   }
 }
+
 }

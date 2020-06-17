@@ -34,10 +34,6 @@ class OmsetApi extends REST_Controller {
     public function getomsetlimit_post(){
 
         $username = $this->post("username");
-            // echo "<pre>";
-            // print_r($ket);
-            // echo "</pre>";
-
         $omsetData = $this->Kdimodel->getOmsetLimit($username);
         
         if (count($omsetData) == 0) {
@@ -71,7 +67,6 @@ class OmsetApi extends REST_Controller {
     }
 
     public function getomsetyear_post(){
-
         $username = $this->post("username");
         $omsetData = $this->Kdimodel->getOmsetYear($username);
         
@@ -126,4 +121,5 @@ class OmsetApi extends REST_Controller {
         $this->response($data, REST_Controller::HTTP_OK);
 
     }
+   
 }
