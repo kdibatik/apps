@@ -155,7 +155,7 @@ class SoModel extends CI_Model
 
   public function submitorderrs($username,$datasave,$noso){
     $this->db->trans_begin();
-    if($this->db->insert('tempsops_h', $datasave)){
+    if($this->db->insert('tempso_h', $datasave)){
 
       $this->db->set('noso', $noso, FALSE);
       $this->db->where('noso', 0);
