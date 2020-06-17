@@ -257,5 +257,22 @@ class SoApi extends REST_Controller {
         $data["data"] = $omsetDataresult;
         $this->response($data, REST_Controller::HTTP_OK);
     }
-}
+    }
+
+    public function getorderps_post(){
+        $username = $this->post("username");
+        $omsetData = $this->Kdimodel->getorderps($username);
+        $gettotal =$this->Kdimodel->getorderpstotal($username);
+        if (count($omsetData) == 0) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Filter Omset Detail";
+        }
+           
+        $data["data"] = $omsetData;
+        $data["total"]=$gettotal;
+        $this->response($data, REST_Controller::HTTP_OK);
+    }
 }

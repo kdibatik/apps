@@ -8,6 +8,7 @@ class SoModel extends CI_Model
   public $cst = 'customer';
   public $sod = 'so_d';
   public $orderrs_d = 'tempso_d';
+  public $orderps_d = 'tempsops_d';
 
   public function __construct()
 
@@ -132,7 +133,6 @@ class SoModel extends CI_Model
         {
             $this->db->trans_rollback();//if update fails rollback and  return false
           return FALSE;
-
         }
         else
         {
@@ -285,4 +285,21 @@ class SoModel extends CI_Model
     }
   }
 
+  public function gerorderps($username){
+    $this->db->select("A.id,A.kodepro,A.warna,A.unitqty,A.qty,A.price,A.note");
+    $this->db->from("{$this->orderps_d} A");
+    $this->db->where("A.username", $username);
+    $this->db->where("A.noso","0"); 
+    $this->db->order_by("A.warna","DESC");
+    $query = $this->db->get();
+    return $query->result();
+  }
+  public function gerorderpstotal($username){
+    $this->db->select("(sum(A.price * A.qty)) as total");
+    $this->db->from("{$this->orderps_d} A");
+    $this->db->where("A.username", $username);
+    $this->db->where("A.noso","0"); 
+    $query = $this->db->get();
+    return $query->result();
+  }
 }
