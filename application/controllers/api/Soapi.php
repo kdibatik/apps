@@ -243,9 +243,9 @@ class SoApi extends REST_Controller {
             );
 
         print_r($datasave)
-        $omsetData = $this->Kdimodel->submitorderrs($username,$datasave,$noso);
+        $omsetDataresult = $this->Kdimodel->submitorderrs($username,$datasave,$noso);
         
-        if (!$omsetData) {
+        if (!$omsetDataresult) {
             $data["message"] = "User Tidak ditemukan";
             $data["success"] = 0;
         }else{
@@ -253,7 +253,7 @@ class SoApi extends REST_Controller {
             $data["message"] = "Success Delete Order Detail";
         }
            
-        $data["data"] = $omsetData;
+        $data["data"] = $omsetDataresult;
         $this->response($data, REST_Controller::HTTP_OK);
     }
 }
