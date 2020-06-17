@@ -207,7 +207,7 @@ class SoApi extends REST_Controller {
     }
 
     public function submitorderrstemp_post(){
-        
+        $date = new DateTime(date('Y-m-d H:i:s')
         $username = $this->post("username");
         $term= $this->post("term");
         $note= $this->post("note");
@@ -225,6 +225,7 @@ class SoApi extends REST_Controller {
                 $noso=($surfixnoso * 1000) + 1;
             }
         }
+        print_r($noso);
 
         if($username!="" && $term!="" && $cst!=""){
 
@@ -235,7 +236,7 @@ class SoApi extends REST_Controller {
                 'cst' => $cst,
                 'ref' => $ref,
                 'ppn' => $ppn,
-                'tgl' =>date(),
+                'tgl' => $date,
                 'noso' => $noso,
             );
 
