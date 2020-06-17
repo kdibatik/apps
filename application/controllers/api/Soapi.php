@@ -220,13 +220,13 @@ class SoApi extends REST_Controller {
         $cekmax=$this->Kdimodel->getmaxdata();
        
         if($cekmax['noso']!=null){
-            if($cekmax['noso'] > ($surfixnoso * 1000) + 1){
+            if($cekmax['noso'] > ($surfixnoso * 10000) + 1){
                 $noso=$cekmax['noso'] + 1;
             }else{
-                $noso=($surfixnoso * 1000) + 1;
+                $noso=($surfixnoso * 10000) + 1;
             }
         }else{
-            $noso=($surfixnoso * 1000) + 1;
+            $noso=($surfixnoso * 10000) + 1;
         }
         
         if($username!="" && $term!="" && $cst!=""){
