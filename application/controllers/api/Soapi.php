@@ -132,7 +132,8 @@ class SoApi extends REST_Controller {
                 'warna' => $warna,
                 'unitqty' => $unitqty,
                 'qty' => $qty,
-                'price' => $price
+                'price' => $price,
+               
             );
 
             $omsetData = $this->Kdimodel->saveordermodelps($data);

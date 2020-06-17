@@ -92,57 +92,58 @@ class SoModel extends CI_Model
     //return $idOfInsertedData = $this->db->insert_id();
     // kurangi stock
 
-  $this->db->trans_begin();
-  $this->db->set('sisasls', 'sisasls -'.$data["qty"], FALSE);
-  $this->db->set('booking', 'booking +'.$data["qty"], FALSE);
-  $this->db->where('kodepro', $data["kodepro"]);
-  $this->db->where('ukuran', $data["ukuran"]);
-  $this->db->where('warna', $data["warna"]);
-  $this->db->update('stock');
-  if ($this->db->trans_status() === FALSE)//checks transaction status
-    {
-        $this->db->trans_rollback();//if update fails rollback and  return false
-       return FALSE;
-
-    }
-    else
-    {   
-        
-        //if success commit transaction and returns true
-        $this->db->insert('tempso_d', $data);
-        if($this->db->affected_rows() > 0){
-          $this->db->trans_commit();
-          return TRUE;
-        }else{
+      $this->db->trans_begin();
+      $this->db->set('sisasls', 'sisasls -'.$data["qty"], FALSE);
+      $this->db->set('booking', 'booking +'.$data["qty"], FALSE);
+      $this->db->where('kodepro', $data["kodepro"]);
+      $this->db->where('ukuran', $data["ukuran"]);
+      $this->db->where('warna', $data["warna"]);
+      $this->db->update('stock');
+      if ($this->db->trans_status() === FALSE)//checks transaction status
+        {
+            $this->db->trans_rollback();//if update fails rollback and  return false
           return FALSE;
+
         }
-       
-    }
+        else
+        {   
+            
+            //if success commit transaction and returns true
+            $this->db->insert('tempso_d', $data);
+            if($this->db->affected_rows() > 0){
+              $this->db->trans_commit();
+              return TRUE;
+            }else{
+              return FALSE;
+            }
+          
+        }
 
   }
-  public function saveordermodelps($data){
-  $this->db->trans_begin();
-  $this->db->set('sisa', 'sisa -'.$data["qty"], FALSE);
-  $this->db->set('qtytrm', 'qtytrm +'.$data["qty"], FALSE);
-  $this->db->where('kodepro', $data["kodepro"]);
-  $this->db->where('warna', $data["warna"]);
-  $this->db->update('stcokpre');
-  if ($this->db->trans_status() === FALSE)//checks transaction status
-    {
-        $this->db->trans_rollback();//if update fails rollback and  return false
-       return FALSE;
 
-    }
-    else
-    {
-        $this->db->trans_commit();//if success commit transaction and returns true
-        if($this->db->insert('tempsops_d', $data)){
-          return TRUE;
-        }else{
+  public function saveordermodelps($data){
+      $this->db->trans_begin();
+      $this->db->set('sisa', 'sisa -'.$data["qty"], FALSE);
+      $this->db->set('qtykrm', 'qtykrm +'.$data["qty"], FALSE);
+      $this->db->where('kodepro', $data["kodepro"]);
+      $this->db->where('warna', $data["warna"]);
+      $this->db->update('stcokpre');
+      if ($this->db->trans_status() === FALSE)//checks transaction status
+        {
+            $this->db->trans_rollback();//if update fails rollback and  return false
           return FALSE;
+
         }
-        
-    }
+        else
+        {
+            $this->db->trans_commit();//if success commit transaction and returns true
+            if($this->db->insert('tempsops_d', $data)){
+              return TRUE;
+            }else{
+              return FALSE;
+            }
+            
+        }
 
   }
 
@@ -180,6 +181,7 @@ class SoModel extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
+
   public function getorderrstotal($username){
     $this->db->select("(sum(A.price * A.qty * A.ukuran)) as total");
     $this->db->from("{$this->orderrs_d} A");
@@ -190,25 +192,25 @@ class SoModel extends CI_Model
   }
 
   public function delorderrs($username){
-  $this->db->trans_begin();
-  $this->db->where('username', $username);
-  $this->db->delete('tempso_d');
-    if($this->db->affected_rows()){
-      $this->db->where('username',$username);
-      $this->db->delete('tempso_h');
-      if($this->db->affected_rows()){
-        $this->db->trans_commit();
-        return true;
-      }else{
-       
-        $this->db->trans_rollback();
-        return false;
-      }
-    }
-    else{
-      $this->db->trans_rollback();
-      return false;
-    }
+      $this->db->trans_begin();
+      $this->db->where('username', $username);
+      $this->db->delete('tempso_d');
+        if($this->db->affected_rows()){
+          $this->db->where('username',$username);
+          $this->db->delete('tempso_h');
+          if($this->db->affected_rows()){
+            $this->db->trans_commit();
+            return true;
+          }else{
+          
+            $this->db->trans_rollback();
+            return false;
+          }
+        }
+        else{
+          $this->db->trans_rollback();
+          return false;
+        }
   }
 
   public function deldetailorderrs($username,$iddata,$idstsdel){
@@ -278,9 +280,9 @@ class SoModel extends CI_Model
           return true;
         }
        
-  }else{
-    return false;
+    }else{
+      return false;
+    }
   }
-}
 
 }
