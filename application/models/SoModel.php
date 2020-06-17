@@ -153,9 +153,9 @@ class SoModel extends CI_Model
     return $query->row_array();
   }
 
-  public function submitorderrs($username,$data,$noso){
+  public function submitorderrs($username,$datasave,$noso){
     $this->db->trans_begin();
-    if($this->db->insert('tempsops_h', $data)){
+    if($this->db->insert('tempsops_h', $datasave)){
 
       $this->db->set('noso', $noso, FALSE);
       $this->db->where('noso', 0);

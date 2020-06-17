@@ -242,9 +242,9 @@ class SoApi extends REST_Controller {
                 'noso' => $noso,
             );
 
-        print_r($datasave)
+        print_r($datasave);
         $omsetDataresult = $this->Kdimodel->submitorderrs($username,$datasave,$noso);
-        
+   
         if (!$omsetDataresult) {
             $data["message"] = "User Tidak ditemukan";
             $data["success"] = 0;
