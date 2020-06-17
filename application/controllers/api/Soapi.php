@@ -238,7 +238,7 @@ class SoApi extends REST_Controller {
                 'cst' => $cst,
                 'ref' => $ref,
                 'ppn' => $ppn,
-                'tgl' => $date,
+                'tgl' => new DateTime(date('Y-m-d H:i:s')),
                 'noso' => strval($noso),
             );
 
