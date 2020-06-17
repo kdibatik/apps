@@ -216,8 +216,9 @@ class SoApi extends REST_Controller {
         $ppn=$this->post("ppn");
 
         $surfixnoso=date('yy') & date('mm');
+        print_r($surfixnoso);
         $cekmax=$this->Kdimodel->getmaxdata();
-        print_r($cekmax['noso']);
+       
         if($cekmax['noso']!=null){
             if($cekmax['noso'] > ($surfixnoso * 1000) + 1){
                 $noso=$cekmax['noso'] + 1;
@@ -227,8 +228,7 @@ class SoApi extends REST_Controller {
         }else{
             $noso=($surfixnoso * 1000) + 1;
         }
-        print_r($noso);
-
+        
         if($username!="" && $term!="" && $cst!=""){
 
             $data = array(
@@ -242,7 +242,7 @@ class SoApi extends REST_Controller {
                 'noso' => $noso,
             );
 
-        
+        print_r($data)
         $omsetData = $this->Kdimodel->submitorderrs($username,$data,$noso);
         
         if (!$omsetData) {
