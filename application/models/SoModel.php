@@ -127,7 +127,7 @@ class SoModel extends CI_Model
       $this->db->set('qtykrm', 'qtykrm +'.$data["qty"], FALSE);
       $this->db->where('kodepro', $data["kodepro"]);
       $this->db->where('warna', $data["warna"]);
-      $this->db->update('stcokpre');
+      $this->db->update('stockpre');
       if ($this->db->trans_status() === FALSE)//checks transaction status
         {
             $this->db->trans_rollback();//if update fails rollback and  return false
