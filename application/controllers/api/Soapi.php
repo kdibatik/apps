@@ -275,4 +275,74 @@ class SoApi extends REST_Controller {
         $data["total"]=$gettotal;
         $this->response($data, REST_Controller::HTTP_OK);
     }
+    public function deldetailorderps_post(){
+
+        $username = $this->post("username");
+        $iddata=$this->post("iddata");
+        $idstsdel=$this->post("idstsdel"); // ini menandakan del 1 item /del semuanya 1 untuk 1 item 0 untuk semua item
+        $omsetData = $this->Kdimodel->deldetailorderps($username,$iddata,$idstsdel);
+        
+        if (!$omsetData) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Delete Order Detail";
+        }
+           
+        $data["data"] = $omsetData;
+        $this->response($data, REST_Controller::HTTP_OK);
+    }
+
+    public function submitorderpstemp_post(){
+        $date = new DateTime(date('Y-m-d H:i:s'));
+        $username = $this->post("username");
+        $term= $this->post("term");
+        $note= $this->post("note");
+        $cst= $this->post("cst");
+        $ref= $this->post("ref");
+        $ppn=$this->post("ppn");
+
+        $surfixnoso=date('ym');
+
+        $cekmax=$this->Kdimodel->getmaxdataps();
+       //print_r($cekmax['noso']);
+        if($cekmax['noso']!=null){
+            if($cekmax['noso'] >= ($surfixnoso * 10000) + 1){
+                $noso=$cekmax['noso'] + 1;
+            }else{
+                $noso=($surfixnoso * 10000) + 1;
+            }
+        }else{
+            $noso=($surfixnoso * 10000) + 1;
+        }
+        
+        if($username!="" && $term!="" && $cst!=""){
+
+            $datasave = array(
+                'username' => $username,
+                'term' => $term,
+                'note' => $note,
+                'cst' => $cst,
+                'ref' => $ref,
+                'ppn' => $ppn,
+                'tgl' => date('Y-m-d H:i:s'),
+                'noso' => strval($noso),
+            );
+
+       // print_r($datasave);
+        $omsetDataresult = $this->Kdimodel->submitorderps($username,$datasave,$noso);
+   
+        if (!$omsetDataresult) {
+            $data["message"] = "User Tidak ditemukan";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Submit Order";
+        }
+           
+        $data["data"] = $omsetDataresult;
+        $this->response($data, REST_Controller::HTTP_OK);
+    }
+    }
 }

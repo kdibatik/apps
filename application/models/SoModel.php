@@ -194,6 +194,7 @@ class SoModel extends CI_Model
   public function delorderrs($username){
       $this->db->trans_begin();
       $this->db->where('username', $username);
+      $this->db->where('noso', 0);
       $this->db->delete('tempso_d');
         if($this->db->affected_rows()){
           $this->db->where('username',$username);
@@ -261,6 +262,7 @@ class SoModel extends CI_Model
               }else{
                   $result = $this->db
                   ->where('username', $username)
+                  ->where('noso', 0)
                   ->delete('tempso_d');
               }
               
@@ -301,5 +303,95 @@ class SoModel extends CI_Model
     $this->db->where("A.noso","0"); 
     $query = $this->db->get();
     return $query->result();
+  }
+
+  public function deldetailorderps($username,$iddata,$idstsdel){
+    
+    if($idstsdel == 1){
+      $this->db->select('A.kodepro,A.warna,A.id,A.qty');
+      $this->db->from("{$this->orderps_d} A");
+      $this->db->where('A.id', $iddata);
+      $this->db->where('A.username', $username);
+      $query = $this->db->get();
+    }else{
+      $this->db->select('A.kodepro,A.warna,A.id,A.qty');
+      $this->db->from("{$this->orderps_d} A");
+      $this->db->where('A.username', $username);
+      $query = $this->db->get();
+    }
+      if(!empty($query))
+      {
+        $cekpoin = false;
+        $this->db->trans_begin();
+        foreach($query->result() as $key=>$item){
+          $this->db->set('sisa', 'sisa +'.$item->qty, FALSE);
+          $this->db->set('qtykrm', 'qtykrm -'.$item->qty, FALSE);
+          $this->db->where('kodepro', $item->kodepro);
+          $this->db->where('warna', $item->warna);
+          $this->db->update('stockpre');
+          if ($this->db->trans_status() === FALSE)//checks transaction status
+            {
+              $this->db->trans_rollback();//if update fails rollback and  return false
+               return FALSE;
+            }
+            else
+            {   
+         
+              if($idstsdel == 1){
+                $result = $this->db
+                ->where('username', $username)
+                ->where('id', $iddata)
+                ->delete('tempsops_d');
+              }else{
+                  $result = $this->db
+                  ->where('username', $username)
+                  ->where('noso', 0)
+                  ->delete('tempsops_d');
+              }
+              
+              if($result === false){
+                $this->db->trans_rollback();
+                $cekpoin = true;
+                break;
+              }
+             
+            }
+        }
+
+        if($cekpoin === true){
+          return false;
+        }else{
+           $this->db->trans_commit();
+          return true;
+        }
+       
+    }else{
+      return false;
+    }
+  }
+
+  public function getmaxdataps(){
+    $this->db->select("MAX(noso) as noso");
+    $this->db->from("tempsops_h");
+    $query = $this->db->get();
+    return $query->row_array();
+  }
+
+  public function submitorderps($username,$datasave,$noso){
+    $this->db->trans_begin();
+    if($this->db->insert('tempsops_h', $datasave)){
+
+      $this->db->set('noso', $noso, FALSE);
+      $this->db->where('noso', 0);
+      $this->db->where('username', $username);
+      $this->db->update('tempsops_d');
+
+      $this->db->trans_commit();
+      return true;
+    }else{
+      $this->db->trans_rollback();
+      return false;
+    }
+
   }
 }
