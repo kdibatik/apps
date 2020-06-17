@@ -224,6 +224,8 @@ class SoApi extends REST_Controller {
             }else{
                 $noso=($surfixnoso * 1000) + 1;
             }
+        }else{
+            $noso=($surfixnoso * 1000) + 1;
         }
         print_r($noso);
 
