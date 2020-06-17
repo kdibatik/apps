@@ -150,7 +150,7 @@ class SoModel extends CI_Model
     $this->db->select("MAX(noso) as noso");
     $this->db->from("tempso_h");
     $query = $this->db->get();
-    return $query->row_result();
+    return $query->row();
   }
 
   public function submitorderrs($username,$data,$noso){
