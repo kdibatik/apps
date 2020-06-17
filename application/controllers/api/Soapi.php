@@ -215,8 +215,10 @@ class SoApi extends REST_Controller {
         $ref= $this->post("ref");
         $ppn=$this->post("ppn");
 
-        $surfixnoso=date('YY') & date('mm');
-        print_r($surfixnoso);
+        $tahun=date('YY');
+        $bulan=date('mm');
+        $surfixnoso=$tahun & $bulan;
+        print_r($tahun & $bulan);
         $cekmax=$this->Kdimodel->getmaxdata();
        
         if($cekmax['noso']!=null){
