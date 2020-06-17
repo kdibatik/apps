@@ -285,7 +285,7 @@ class SoModel extends CI_Model
     }
   }
 
-  public function gerorderps($username){
+  public function getorderps($username){
     $this->db->select("A.id,A.kodepro,A.warna,A.unitqty,A.qty,A.price,A.note");
     $this->db->from("{$this->orderps_d} A");
     $this->db->where("A.username", $username);
@@ -294,7 +294,7 @@ class SoModel extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
-  public function gerorderpstotal($username){
+  public function getorderpstotal($username){
     $this->db->select("(sum(A.price * A.qty)) as total");
     $this->db->from("{$this->orderps_d} A");
     $this->db->where("A.username", $username);
