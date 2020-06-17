@@ -254,3 +254,4 @@ class SoApi extends REST_Controller {
         $this->response($data, REST_Controller::HTTP_OK);
     }
 }
+}
