@@ -9,6 +9,8 @@ class SoModel extends CI_Model
   public $sod = 'so_d';
   public $orderrs_d = 'tempso_d';
   public $orderps_d = 'tempsops_d';
+  public $orderrs_h = 'tempso_h';
+  public $orderps_h = 'tempsops_h';
 
   public function __construct()
 
@@ -394,5 +396,19 @@ class SoModel extends CI_Model
       return false;
     }
 
+  }
+
+  public function getOrderrs($username){
+    $month = date('m');
+    $this->db->select('A.noso,A.tgl,A.ppn,A.ref,B.perusahaan,sum(C.price * C.qty * C.ukuran) as grandtotal');
+    $this->db->from("{$this->orderrs_h} A");
+    $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
+    $this->db->join("{$this->orderrs_d} C", 'A.noso =C.noso');
+    $this->db->where('A.username', $username);
+    $this->db->where('Month(A.tgl)', $month);
+    $this->db->order_by("A.tgl", "DESC");
+    $this->db->limit(5); 
+    $query = $this->db->get();
+    return $query->result();
   }
 }
