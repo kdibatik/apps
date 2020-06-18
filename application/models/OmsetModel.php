@@ -82,7 +82,7 @@ class OmsetModel extends CI_Model
   }
 
   public function getOmsetCustomer($username,$bln,$cst){
-    $this->db->select("B.perusahaan,A.noso,A.tgl,A.grandtotal,A.stsapprove");
+    $this->db->select("B.perusahaan,A.noso,A.tgl,A.grandtotal,A.ref,A.stsapprove");
     $this->db->from("{$this->soh} A");
     $this->db->join("{$this->cst} B", "A.cst = B.kodecst");
     $this->db->join("{$this->user} C", "A.sales = C.username");
