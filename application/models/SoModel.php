@@ -21,7 +21,7 @@ class SoModel extends CI_Model
     $data = array();
     $soh=array();
     //$ukur=array();
-    $this->db->select('A.noso,B.perusahaan,B.alamat,B.tel,A.tgl,A.grandtotal,A.total,A.ppn,A.stsapprove');
+    $this->db->select('A.noso,B.perusahaan,B.alamat,B.tel,A.tgl,A.grandtotal,A.total,A.ppn,A.ref,A.stsapprove');
     $this->db->from("{$this->soh} A");
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
     $this->db->join("{$this->user} C", 'A.sales = C.username');
@@ -44,6 +44,7 @@ class SoModel extends CI_Model
                 'stsapprove'=>$item->stsapprove,
                 'total'=>$item->total,
                 'ppn'=>$item->ppn,
+                'ref'=>$item->ref,
               );
               $ambildata=$this->getOrderDetail($item->noso);
               $soh["sod"]=$ambildata;
