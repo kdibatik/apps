@@ -349,7 +349,7 @@ class SoApi extends REST_Controller {
     public function getorderrslimit_post(){
         $username = $this->post("username");
 
-        $omsetData = $this->Kdimodel->getOrderrs($username);
+        $omsetData = $this->Kdimodel->getOrderrslimit($username);
         
         if (count($omsetData) == 0) {
             $data["message"] = "User Tidak ditemukan";
