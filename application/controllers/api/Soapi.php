@@ -346,7 +346,7 @@ class SoApi extends REST_Controller {
     }
     }
 
-    public function getorderrs_post(){
+    public function getorderrslimit_post(){
         $username = $this->post("username");
 
         $omsetData = $this->Kdimodel->getOrderrs($username);
