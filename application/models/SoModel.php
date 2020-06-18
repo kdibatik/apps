@@ -407,7 +407,7 @@ class SoModel extends CI_Model
     $this->db->where('A.username', $username);
     $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
-    $this->db->group_by("A.noso")
+    $this->db->group_by("A.noso");
     $this->db->limit(5); 
     $query = $this->db->get();
     return $query->result();
