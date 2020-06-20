@@ -104,6 +104,15 @@ class SoModel extends CI_Model
     return $query->result_array();
   }
 
+  public function getOrderDetailrs($noso){
+    $this->db->select('A.noso,A.kodepro,A.ukuran,A.unitqty,A.qty,A.unit,A.warna,A.price,(A.price * A.qty * A.ukuran) as total');
+    $this->db->from("{$this->orderrs_d} A");
+    $this->db->where('A.noso', $noso);
+    $this->db->order_by("A.Warna DESC");
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
   public function getCustomer($username){
     $this->db->select('A.kodecst,A.perusahaan');
     $this->db->from("{$this->cst} A");
