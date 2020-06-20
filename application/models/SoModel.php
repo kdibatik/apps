@@ -81,7 +81,7 @@ class SoModel extends CI_Model
                 'alamat'=>$item->alamat,
                 'tel'=>$item->tel,
                 'tgl'=>$item->tgl,
-                'grandtotal'=>$item->grandtotal,
+                'grandtotal'=>$item->total,
                 'total'=>($item->total + $item->nilaippn),
                 'ppn'=>$item->nilaippn,
                 'ref'=>$item->ref,
