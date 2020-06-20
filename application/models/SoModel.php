@@ -459,4 +459,19 @@ class SoModel extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
+
+  public function getOrderpslimit($username){
+    $month = date('m');
+    $this->db->select('A.noso,A.tgl,A.ppn,A.ref,B.perusahaan,sum(C.price * C.qty) as grandtotal');
+    $this->db->from("{$this->orderps_h} A");
+    $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
+    $this->db->join("{$this->orderps_d} C", 'A.noso =C.noso');
+    $this->db->where('A.username', $username);
+    $this->db->where('Month(A.tgl)', $month);
+    $this->db->order_by("A.tgl", "DESC");
+    $this->db->group_by("A.noso");
+    $this->db->limit(5); 
+    $query = $this->db->get();
+    return $query->result();
+  }
 }
