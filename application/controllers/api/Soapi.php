@@ -34,7 +34,7 @@ class SoApi extends REST_Controller {
 
     }
 
-    public funtion getdetailOrderrs_post(){
+    public function getdetailOrderrs_post(){
 
         $username = $this->post("username");
         $noso = $this->post("noso");
