@@ -26,7 +26,7 @@ class SoModel extends CI_Model
     $this->db->select('A.noso,B.perusahaan,B.alamat,B.tel,A.tgl,A.grandtotal,A.total,A.ppn,A.ref,A.stsapprove');
     $this->db->from("{$this->soh} A");
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
-    $this->db->join("{$this->user} C", 'A.sales = C.username');
+    $this->db->join("{$this->user} C", 'A.username = C.email');
     $this->db->where('C.email', $username);
     $this->db->where('A.noso', $noso);
     $query = $this->db->get();
