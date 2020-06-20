@@ -19,7 +19,7 @@ class SoModel extends CI_Model
     $this->load->database();
   }
 
-  public function getOrderHeader ($username,$noso){
+  public function getOrderHeader($username,$noso){
     $data = array();
     $soh=array();
     //$ukur=array();
@@ -49,6 +49,44 @@ class SoModel extends CI_Model
                 'ref'=>$item->ref,
               );
               $ambildata=$this->getOrderDetail($item->noso);
+              $soh["sod"]=$ambildata;
+              $data = $soh;
+        }
+              
+      }
+      return $data;
+  }
+
+  public function getOrderHeaderrs($username,$noso){
+    $data = array();
+    $soh=array();
+    //$ukur=array();
+    $this->db->select('B.perusahaan,B.alamat,B.tel,A.*, SUM(D.qty * D.ukuran * D.price) AS total ,IF(A.ppn=0,0,SUM(D.qty * D.ukuran * D.price) * 10/100) AS nilaippn');
+    $this->db->from("{$this->orderrs_h} A");
+    $this->db->join("{$this->orderrs_d} D", 'A.noso = D.noso');
+    $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
+    $this->db->join("{$this->user} C", 'A.sales = C.username');
+    $this->db->where('C.email', $username);
+    $this->db->where('A.noso', $noso);
+    $query = $this->db->get();
+      if(!empty($query))
+      {
+        foreach($query->result() as $key=>$item){
+              $noso = $item->noso;
+              // $kodemerek=$merek;
+              //buat array keterangan
+              $soh["soh"]=array(
+                'noso'=>$item->noso,
+                'perusahaan'=>$item->perusahaan,
+                'alamat'=>$item->alamat,
+                'tel'=>$item->tel,
+                'tgl'=>$item->tgl,
+                'grandtotal'=>$item->grandtotal,
+                'total'=>($item->total + $item->nilaippn),
+                'ppn'=>$item->nilaippn,
+                'ref'=>$item->ref,
+              );
+              $ambildata=$this->getOrderDetailrs($item->noso);
               $soh["sod"]=$ambildata;
               $data = $soh;
         }
