@@ -95,6 +95,44 @@ class SoModel extends CI_Model
       return $data;
   }
 
+  public function getOrderHeaderps($username,$noso){
+    $data = array();
+    $soh=array();
+    //$ukur=array();
+    $this->db->select('B.perusahaan,B.alamat,B.tel,A.*, SUM(D.qty * D.price) AS total ,IF(A.ppn=0,0,SUM(D.qty * D.price) * 10/100) AS nilaippn');
+    $this->db->from("{$this->orderps_h} A");
+    $this->db->join("{$this->orderps_d} D", 'A.noso = D.noso');
+    $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
+    $this->db->join("{$this->user} C", 'A.username = C.email');
+    $this->db->where('C.email', $username);
+    $this->db->where('A.noso', $noso);
+    $query = $this->db->get();
+      if(!empty($query))
+      {
+        foreach($query->result() as $key=>$item){
+              $noso = $item->noso;
+              // $kodemerek=$merek;
+              //buat array keterangan
+              $soh["soh"]=array(
+                'noso'=>$item->noso,
+                'perusahaan'=>$item->perusahaan,
+                'alamat'=>$item->alamat,
+                'tel'=>$item->tel,
+                'tgl'=>$item->tgl,
+                'grandtotal'=>$item->total,
+                'total'=>($item->total + $item->nilaippn),
+                'ppn'=>$item->nilaippn,
+                'ref'=>$item->ref,
+              );
+              $ambildata=$this->getOrderDetailps($item->noso);
+              $soh["sod"]=$ambildata;
+              $data = $soh;
+        }
+              
+      }
+      return $data;
+  }
+
   public function getOrderDetail($noso){
     $this->db->select('A.noso,A.kodebrg,A.ukuran,A.unitqty,A.qty,A.unit,A.warna,A.price,A.total');
     $this->db->from("{$this->sod} A");
@@ -107,6 +145,15 @@ class SoModel extends CI_Model
   public function getOrderDetailrs($noso){
     $this->db->select('A.noso,A.kodepro,A.ukuran,A.unitqty,A.qty,A.unit,A.warna,A.price,(A.price * A.qty * A.ukuran) as total');
     $this->db->from("{$this->orderrs_d} A");
+    $this->db->where('A.noso', $noso);
+    $this->db->order_by("A.Warna DESC");
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function getOrderDetailps($noso){
+    $this->db->select('A.noso,A.kodepro,A.unitqty,A.qty,A.warna,A.price,(A.price * A.qty) as total');
+    $this->db->from("{$this->orderps_d} A");
     $this->db->where('A.noso', $noso);
     $this->db->order_by("A.Warna DESC");
     $query = $this->db->get();
@@ -336,6 +383,7 @@ class SoModel extends CI_Model
       return false;
     }
   }
+  
 
   public function getorderps($username){
     $this->db->select("A.id,A.kodepro,A.warna,A.unitqty,A.qty,A.price,A.note");
