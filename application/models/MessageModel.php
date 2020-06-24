@@ -22,9 +22,9 @@ class MessageModel extends CI_Model
   }
 
   public function getMessage($username){
-    $this->db->select('A.email,A.message,A.picurl,A.title,A.url,A.tglsave,A.stsread');
+    $this->db->select('A.username,A.message,A.picurl,A.title,A.url,A.tglsave,A.stsread');
     $this->db->from("{$this->msg} A");
-    $this->db->where('A.email', $username);
+    $this->db->where('A.username', $username);
     $this->db->where('A.stsread', "0");
     $query = $this->db->get();
     return $query->result_array();

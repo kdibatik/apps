@@ -54,7 +54,7 @@ class MessageApi extends REST_Controller {
 
         $omsetData = $this->Kdimodel->postMessage($username,$data);
         
-        if ($omsetData) {
+        if (!$omsetData) {
             $data["message"] = "User Tidak ditemukan";
             $data["success"] = 0;
         }else{
@@ -62,7 +62,7 @@ class MessageApi extends REST_Controller {
             $data["message"] = "Success Save Message";
         }
            
-        $data["data"] = $omsetData;
+        // $data["data"] = $omsetData;
         $this->response($data, REST_Controller::HTTP_OK);
 
     }
