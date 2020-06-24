@@ -45,10 +45,10 @@ class MessageApi extends REST_Controller {
 
         $data = array(
             'username' => $username,
-            'title' => $kodepro,
-            'message' => $warna,
-            'picurl' => $ukuran,
-            'url' => $unitqty,
+            'title' => $title,
+            'message' => $message,
+            'picurl' =>$picurl,
+            'url' => $url,
             'tglsave' => $tglskrg,
         );
 
