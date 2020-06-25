@@ -74,7 +74,7 @@ class StockModel extends CI_Model
 
     if ($sts == "RS"){
       
-      $this->db->select('A.warna');
+      $this->db->select('A.warna,SUM(sisasls * ukuran) AS ttl');
       $this->db->from("{$this->stock} A");
       $this->db->like('A.kodepro', $kodepro);
       if($warna != "%"){
@@ -103,7 +103,7 @@ class StockModel extends CI_Model
 
     }elseif($sts == "PS"){
 
-      $this->db->select('A.warna');
+      $this->db->select('A.warna,SUM(sisa) AS ttl');
       $this->db->from("{$this->stockpre} A");
       $this->db->like('A.kodepro', $kodepro);
       //$this->db->like('A.warna', $warna);
