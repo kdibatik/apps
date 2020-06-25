@@ -67,7 +67,7 @@ class StockModel extends CI_Model
     return $query->result_array();
   }
 
-  public function getstock($sts,$gol,$kodepro){
+  public function getstock($sts,$gol,$kodepro,$warna){
         $datastc = array();
       //  $warna=array();
       // $datatemp=array();
@@ -77,6 +77,7 @@ class StockModel extends CI_Model
       $this->db->select('A.warna');
       $this->db->from("{$this->stock} A");
       $this->db->like('A.kodepro', $kodepro);
+      $this->db->like('A.warna', $warna);
       $this->db->group_by("A.warna");
       $query = $this->db->get();
       if(!empty($query))
@@ -102,6 +103,7 @@ class StockModel extends CI_Model
       $this->db->select('A.warna');
       $this->db->from("{$this->stockpre} A");
       $this->db->like('A.kodepro', $kodepro);
+      $this->db->like('A.warna', $warna);
       $this->db->group_by("A.warna");
       $query = $this->db->get();
       if(!empty($query))

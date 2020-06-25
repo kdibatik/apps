@@ -53,7 +53,8 @@ class StockApi extends REST_Controller {
         $sts=$this->post("idsts");
         $gol=$this->post("gol");
         $kodepro=$this->post("kodepro");
-        $sisaProduct = $this->Kdimodel->getstock($sts,$gol,$kodepro);
+        $warna=$this->post("warna");
+        $sisaProduct = $this->Kdimodel->getstock($sts,$gol,$kodepro,$warna);
         if (count($sisaProduct) == 0) {
             $data["message"] = "User Tidak ditemukan";
             $data["success"] = 0;
