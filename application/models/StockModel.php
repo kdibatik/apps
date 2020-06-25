@@ -77,7 +77,7 @@ class StockModel extends CI_Model
       $this->db->select('A.warna');
       $this->db->from("{$this->stock} A");
       $this->db->like('A.kodepro', $kodepro);
-      $this->db->like('A.warna', $warna);
+      $this->db->like('A.warna', $warna,'none',false);
       $this->db->group_by("A.warna");
       $query = $this->db->get();
       if(!empty($query))
@@ -134,7 +134,7 @@ class StockModel extends CI_Model
       $this->db->from("{$this->stock} A");
       $this->db->like('A.kodepro', $kodepro);
       $this->db->where('A.sisasls >', 0);
-      $this->db->like('A.warna', $warna, 'none', false);
+      $this->db->like('A.warna', $warna);
       // $this->db->group_by('A.warna','asc');
       $this->db->group_by('A.ukuran','desc');
     }elseif($sts=="PS"){
@@ -142,7 +142,7 @@ class StockModel extends CI_Model
       $this->db->from("{$this->stockpre} A");
       $this->db->like('A.kodepro', $kodepro);
       $this->db->where('A.sisa >', 0);
-      $this->db->like('A.warna', $warna, 'none', false);
+      $this->db->like('A.warna', $warna);
 
     }
     $query = $this->db->get();
