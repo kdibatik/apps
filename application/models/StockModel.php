@@ -133,15 +133,15 @@ class StockModel extends CI_Model
       $this->db->select('A.kodepro,A.ukuran,A.unitqty,A.sisasls as sisa,"Roll",A.warna');
       $this->db->from("{$this->stock} A");
       $this->db->like('A.kodepro', $kodepro);
-      $this->db->like('A.sisasls >', 0);
+      $this->db->where('A.sisasls >', 0);
       $this->db->like('A.warna', $warna);
       // $this->db->group_by('A.warna','asc');
       $this->db->group_by('A.ukuran','desc');
     }elseif($sts=="PS"){
-      $this->db->select('A.kodepro,A.sisa,A.unitqty,A.warna ');
+      $this->db->select('A.kodepro,A.sisa,A.unitqty,A.warna');
       $this->db->from("{$this->stockpre} A");
       $this->db->like('A.kodepro', $kodepro);
-      $this->db->like('A.sisa >', 0);
+      $this->db->where('A.sisa >', 0);
       $this->db->like('A.warna', $warna);
 
     }
