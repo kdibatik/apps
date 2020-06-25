@@ -91,6 +91,7 @@ class StockModel extends CI_Model
           $ambildata=$this->getStockDetail($row->warna,$sts,$kodepro);
           $datastc["data"][]=array(
             'warna'=>$row->warna,
+            'ttl'=>$row->ttl,
             'dataproduct'=>$ambildata
           );
         //  print_r($datastc);
@@ -117,6 +118,7 @@ class StockModel extends CI_Model
           $ambildata=$this->getStockDetail($row->warna,$sts,$kodepro);
           $datastc["data"][]=array(
             'warna'=>$row->warna,
+            'ttl'=>$row->ttl,
             'dataproduct'=>$ambildata
           );
 
