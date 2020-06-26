@@ -61,7 +61,7 @@ class SoModel extends CI_Model
     $data = array();
     $soh=array();
     //$ukur=array();
-    $this->db->select('B.perusahaan,B.alamat,B.tel,A.*, ROUND(SUM(D.qty * D.ukuran * D.price),2) AS total ,IF(A.ppn=0,0,ROUND(SUM(D.qty * D.ukuran * D.price) * 10/100),2) AS nilaippn');
+    $this->db->select('B.perusahaan,B.alamat,B.tel,A.*, ROUND(SUM(D.qty * D.ukuran * D.price),2) AS total ,IF(A.ppn=0,0,ROUND(SUM(D.qty * D.ukuran * D.price) * 10/100, 2)) AS nilaippn');
     $this->db->from("{$this->orderrs_h} A");
     $this->db->join("{$this->orderrs_d} D", 'A.noso = D.noso');
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
