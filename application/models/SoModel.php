@@ -500,6 +500,7 @@ class SoModel extends CI_Model
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
     $this->db->join("{$this->orderrs_d} C", 'A.noso =C.noso');
     $this->db->where('A.username', $username);
+    $this->db->where('A.stsapprove', '0');
     $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
