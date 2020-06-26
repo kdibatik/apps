@@ -66,7 +66,7 @@ class SoModel extends CI_Model
     $this->db->join("{$this->orderrs_d} D", 'A.noso = D.noso');
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
     $this->db->join("{$this->user} C", 'A.username = C.email');
-    $this->db->where('C.email', $username);
+    $this->db->where('A.username', $username);
     $this->db->where('A.noso', $noso);
     $query = $this->db->get();
       if(!empty($query))
@@ -516,6 +516,7 @@ class SoModel extends CI_Model
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
     $this->db->join("{$this->orderps_d} C", 'A.noso =C.noso');
     $this->db->where('A.username', $username);
+    $this->db->where('A.stsapprove', '0');
     $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
