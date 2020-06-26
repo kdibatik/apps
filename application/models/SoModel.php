@@ -81,8 +81,8 @@ class SoModel extends CI_Model
                 'alamat'=>$item->alamat,
                 'tel'=>$item->tel,
                 'tgl'=>$item->tgl,
-                'grandtotal'=>$item->total,
-                'total'=>($item->total + $item->nilaippn),
+                'total'=>$item->total,
+                'grandtotal'=>($item->total + $item->nilaippn),
                 'ppn'=>$item->nilaippn,
                 'ref'=>$item->ref,
               );
@@ -119,8 +119,8 @@ class SoModel extends CI_Model
                 'alamat'=>$item->alamat,
                 'tel'=>$item->tel,
                 'tgl'=>$item->tgl,
-                'grandtotal'=>$item->total,
-                'total'=>($item->total + $item->nilaippn),
+                'total'=>$item->total,
+                'grandtotal'=>($item->total + $item->nilaippn),
                 'ppn'=>$item->nilaippn,
                 'ref'=>$item->ref,
               );
