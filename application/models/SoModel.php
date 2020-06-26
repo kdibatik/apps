@@ -82,7 +82,7 @@ class SoModel extends CI_Model
                 'tel'=>$item->tel,
                 'tgl'=>$item->tgl,
                 'total'=>$item->total,
-                'grandtotal'=>($item->total + $item->nilaippn),
+                'grandtotal'=>(floatval($item->total + $item->nilaippn)),
                 'ppn'=>$item->nilaippn,
                 'ref'=>$item->ref,
               );
