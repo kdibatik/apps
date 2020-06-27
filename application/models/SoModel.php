@@ -493,7 +493,7 @@ class SoModel extends CI_Model
 
   }
 
-  public function getOrderrslimit($username){
+  public function getOrderrslimit($username.$stsdata){
     $month = date('m');
     $this->db->select('A.noso,A.tgl,A.ppn,A.ref,B.perusahaan,sum(C.price * C.qty * C.ukuran) as grandtotal');
     $this->db->from("{$this->orderrs_h} A");
@@ -504,12 +504,15 @@ class SoModel extends CI_Model
     $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
-    $this->db->limit(5); 
+    if ($stsdata=="DS"){
+      $this->db->limit(5);
+    }
+     
     $query = $this->db->get();
     return $query->result();
   }
 
-  public function getOrderpslimit($username){
+  public function getOrderpslimit($username,$stsdata){
     $month = date('m');
     $this->db->select('A.noso,A.tgl,A.ppn,A.ref,B.perusahaan,sum(C.price * C.qty) as grandtotal');
     $this->db->from("{$this->orderps_h} A");
@@ -520,7 +523,9 @@ class SoModel extends CI_Model
     $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
-    $this->db->limit(5); 
+    if($stsdata=="DS"){
+      $this->db->limit(5); 
+    }
     $query = $this->db->get();
     return $query->result();
   }
