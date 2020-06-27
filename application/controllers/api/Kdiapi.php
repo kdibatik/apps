@@ -46,10 +46,11 @@ class KdiApi extends REST_Controller {
             $namafilebanner = "uploads/profile/". $filename;
                // $filename = date('Y-m-d h:i:s').".jpg";
                 $imagedata=str_replace(' ', '+', $linkgbr);
-                base64_to_jpeg($imagedata, $namafilebanner);
-
-                // $decoded=base64_decode($linkgbr);
-                // file_put_contents("uploads/profile/".$filename,$decoded);
+                // base64_to_jpeg($imagedata, $namafilebanner);
+                $ifp = fopen($namafilebanner, 'wb');
+                fwrite($ifp, base64_decode($imagedata));
+                fclose($ifp);
+            
 
                 $data = array(
                     "picture" => $filename,
