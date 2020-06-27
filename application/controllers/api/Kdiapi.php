@@ -63,8 +63,5 @@ class KdiApi extends REST_Controller {
               
     }
             
-    }
-    
-
-    
 }
+

@@ -32,10 +32,5 @@ class KdiModel extends CI_Model
 
   }
 
- 
-
-  
-
-  
 
 }
