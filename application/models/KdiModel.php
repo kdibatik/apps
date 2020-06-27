@@ -24,6 +24,14 @@ class KdiModel extends CI_Model
     return $query->result();
   }
 
+
+  public function savepciture($username,$data){
+    
+    $this->db->where('email', $username);
+    return $this->db->update($this->user,$data);
+
+  }
+
  
 
   

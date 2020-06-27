@@ -30,7 +30,40 @@ class KdiApi extends REST_Controller {
     }
 
     
+    public function addpicture_post(){
+        $linkgbr = $this->post("linkgbr");
+        $username = $this->post("username");
+        
+        if ($linkgbr == "" || $username == "") {
+            $resp["success"] = 0;
+            $resp["message"] = "All field is required";
+            $this->response($resp, REST_Controller::HTTP_OK);
+          }else{
+           
+                
+                $filename = "uploads/profile/". $nama.time().".jpg";
+                $imagedata=str_replace(' ', '+', $linkgbr);
+                base64_to_jpeg($imagedata, $filename);
 
+                $data = array(
+                    "picture" => $filename,
+                   
+                  );
+              
+                $saveData = $this->Kdimodel->savepciture($username,$data);
+                if ($saveData) {
+                  $resp["success"] = 1;
+                  $resp["message"] = "Success Submit Banner";
+                }else{
+                  $resp["success"] = 0;
+                  $resp["message"] = "Failed to Submit Banner, Already Exists";
+                }
+                $this->response($resp, REST_Controller::HTTP_OK);
+        }
+              
+    }
+            
+    }
     
 
     
