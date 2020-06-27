@@ -41,12 +41,12 @@ class KdiApi extends REST_Controller {
           }else{
            
                 
-                $filename = "uploads/profile/".date('Y-m-d h:i:s').".jpg";
+                $filename = date('Y-m-d h:i:s').".jpg";
                 //$imagedata=str_replace(' ', '+', $linkgbr);
                 //base64_to_jpeg($imagedata, $filename);
 
                 $decoded=base64_decode($linkgbr);
-                file_put_contents($filename,$decoded);
+                file_put_contents("uploads/profile/".$filename,$decoded);
 
                 $data = array(
                     "picture" => $filename,
