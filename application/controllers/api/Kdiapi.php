@@ -85,6 +85,23 @@ class KdiApi extends REST_Controller {
     
         return $output_file;
     }
-            
+    
+    
+    public function trackdata_post(){
+
+        $username = $this->post("username");
+        $dataso = $this->post("noso");
+        $profileData = $this->Kdimodel->getTrackData($username,$noso);
+        if (count($profileData) == 0) {
+            $data["message"] = "Data Not Found";
+            $data["success"] = 0;
+        }else{
+            $data["success"] = 1;
+            $data["message"] = "Success Get data";
+        }
+        $data["data"] = $profileData;
+        $this->response($data, REST_Controller::HTTP_OK);
+
+    }
 }
 
