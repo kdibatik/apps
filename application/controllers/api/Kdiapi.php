@@ -91,7 +91,7 @@ class KdiApi extends REST_Controller {
 
         $username = $this->post("username");
         $dataso = $this->post("noso");
-        $profileData = $this->Kdimodel->getTrackData($username,$noso);
+        $profileData = $this->Kdimodel->getTrackData($username,$dataso);
         if (count($profileData) == 0) {
             $data["message"] = "Data Not Found";
             $data["success"] = 0;
