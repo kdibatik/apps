@@ -41,7 +41,7 @@ class KdiApi extends REST_Controller {
           }else{
            
                 
-                $filename = "uploads/profile/". $nama.time().".jpg";
+                $filename = "uploads/profile/". date().time().".jpg";
                 $imagedata=str_replace(' ', '+', $linkgbr);
                 base64_to_jpeg($imagedata, $filename);
 
