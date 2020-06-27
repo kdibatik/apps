@@ -495,12 +495,14 @@ class SoModel extends CI_Model
 
   public function getOrderrslimit($username,$stsdata){
     $month = date('m');
-    $this->db->select('A.noso,A.tgl,A.ppn,A.ref,B.perusahaan,sum(C.price * C.qty * C.ukuran) as grandtotal');
+    $this->db->select('A.noso,A.tgl,A.ppn,A.ref,B.perusahaan,sum(C.price * C.qty * C.ukuran) as grandtotal,stsapprove');
     $this->db->from("{$this->orderrs_h} A");
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
     $this->db->join("{$this->orderrs_d} C", 'A.noso =C.noso');
     $this->db->where('A.username', $username);
-    $this->db->where('A.stsapprove', '0');
+    if($stsdata=="DS"){
+      $this->db->where('A.stsapprove', '0');
+    }
     $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
@@ -519,7 +521,9 @@ class SoModel extends CI_Model
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
     $this->db->join("{$this->orderps_d} C", 'A.noso =C.noso');
     $this->db->where('A.username', $username);
-    $this->db->where('A.stsapprove', '0');
+    if($stsdata=="DS"){
+      $this->db->where('A.stsapprove', '0');
+    }
     $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
