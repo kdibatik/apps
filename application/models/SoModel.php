@@ -493,7 +493,7 @@ class SoModel extends CI_Model
 
   }
 
-  public function getOrderrslimit($username.$stsdata){
+  public function getOrderrslimit($username,$stsdata){
     $month = date('m');
     $this->db->select('A.noso,A.tgl,A.ppn,A.ref,B.perusahaan,sum(C.price * C.qty * C.ukuran) as grandtotal');
     $this->db->from("{$this->orderrs_h} A");
