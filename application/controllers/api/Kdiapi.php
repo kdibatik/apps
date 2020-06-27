@@ -40,8 +40,10 @@ class KdiApi extends REST_Controller {
             $this->response($resp, REST_Controller::HTTP_OK);
           }else{
            
-                
-                $filename = date('Y-m-d h:i:s').".jpg";
+            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+            $alphaLength=10;
+            $filename=substr(str_shuffle($alphabet),0,$alphaLength).".jpg";
+               // $filename = date('Y-m-d h:i:s').".jpg";
                 //$imagedata=str_replace(' ', '+', $linkgbr);
                 //base64_to_jpeg($imagedata, $filename);
 
