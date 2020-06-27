@@ -35,10 +35,10 @@ class KdiModel extends CI_Model
   public function getTrackData($username,$dataso){
     $query = $this->db->query('
     SELECT noso,ref,tgl ,
-    (SELECT tgl FROM do_h WHERE noso='.$dataso.') AS tgldo,
-    (SELECT tgl FROM inv_h WHERE noso='.$dataso.') AS tglinv,
-    (SELECT tgl FROM lnscst_h INNER JOIN lnscst_d ON lnscst_h.nobyr=lnscst_d.nobyr WHERE lnscst_d.noinv=(SELECT noinv FROM inv_h WHERE noso='.$dataso.')) AS tgllunas
-    FROM so_h WHERE noso='.$dataso.'');
+    (SELECT tgl FROM do_h WHERE noso="'.$dataso.'") AS tgldo,
+    (SELECT tgl FROM inv_h WHERE noso="'.$dataso.'") AS tglinv,
+    (SELECT tgl FROM lnscst_h INNER JOIN lnscst_d ON lnscst_h.nobyr=lnscst_d.nobyr WHERE lnscst_d.noinv=(SELECT noinv FROM inv_h WHERE noso="'.$dataso.'")) AS tgllunas
+    FROM so_h WHERE noso="'.$dataso.'"');
     return $query->result();
   }
 
