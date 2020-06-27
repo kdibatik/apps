@@ -85,6 +85,7 @@ class SoModel extends CI_Model
                 'grandtotal'=>(floatval($item->total + $item->nilaippn)),
                 'ppn'=>$item->nilaippn,
                 'ref'=>$item->ref,
+                'stsapprove'=>$item->stsapprove,
               );
               $ambildata=$this->getOrderDetailrs($item->noso);
               $soh["sod"]=$ambildata;
@@ -123,6 +124,7 @@ class SoModel extends CI_Model
                 'grandtotal'=>($item->total + $item->nilaippn),
                 'ppn'=>$item->nilaippn,
                 'ref'=>$item->ref,
+                 'stsapprove'=>$item->stsapprove,
               );
               $ambildata=$this->getOrderDetailps($item->noso);
               $soh["sod"]=$ambildata;
