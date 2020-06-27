@@ -42,8 +42,11 @@ class KdiApi extends REST_Controller {
            
                 
                 $filename = "uploads/profile/".date('Y-m-d h:i:s').".jpg";
-                $imagedata=str_replace(' ', '+', $linkgbr);
-                base64_to_jpeg($imagedata, $filename);
+                //$imagedata=str_replace(' ', '+', $linkgbr);
+                //base64_to_jpeg($imagedata, $filename);
+
+                $decoded=base64_decode($linkgbr);
+                file_put_contents($filename,$decoded);
 
                 $data = array(
                     "picture" => $filename,
