@@ -43,7 +43,7 @@ class KdiApi extends REST_Controller {
             $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
             $alphaLength=10;
             $filename=substr(str_shuffle($alphabet),0,$alphaLength).".jpg";
-            $namafilebanner = "uploads/banner/". $filename;
+            $namafilebanner = "uploads/profile/". $filename;
                // $filename = date('Y-m-d h:i:s').".jpg";
                 $imagedata=str_replace(' ', '+', $linkgbr);
                 base64_to_jpeg($imagedata, $namafilebanner);
