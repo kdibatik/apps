@@ -136,7 +136,7 @@ class SoModel extends CI_Model
   }
 
   public function getOrderDetail($noso){
-    $this->db->select('A.noso,A.kodebrg,A.ukuran,A.unitqty,A.qty,A.unit,A.warna,A.price,A.total');
+    $this->db->select('A.noso,A.kodebrg,A.namabrg,A.ukuran,A.unitqty,A.qty,A.unit,A.warna,A.price,A.total');
     $this->db->from("{$this->sod} A");
     $this->db->where('A.noso', $noso);
     $this->db->order_by("A.Warna DESC");
