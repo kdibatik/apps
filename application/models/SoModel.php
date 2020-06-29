@@ -275,8 +275,9 @@ class SoModel extends CI_Model
   }
 
   public function getorderrs($username){
-    $this->db->select("A.id,A.kodepro,A.warna,A.ukuran,A.unitqty,A.qty,A.unit,A.price,A.note");
+    $this->db->select("A.id,A.kodepro,B.namapro,A.warna,A.ukuran,A.unitqty,A.qty,A.unit,A.price,A.note");
     $this->db->from("{$this->orderrs_d} A");
+    $this->db->join("{$this->prod} B", 'A.kodepro = B.kodepro');
     $this->db->where("A.username", $username);
     $this->db->where("A.noso","0"); 
     $this->db->order_by("A.warna","DESC");
@@ -391,8 +392,9 @@ class SoModel extends CI_Model
   
 
   public function getorderps($username){
-    $this->db->select("A.id,A.kodepro,A.warna,A.unitqty,A.qty,A.price,A.note");
+    $this->db->select("A.id,A.kodepro,B.namapro,A.warna,A.unitqty,A.qty,A.price,A.note");
     $this->db->from("{$this->orderps_d} A");
+    $this->db->join("{$this->prod} B", 'A.kodepro = B.kodepro');
     $this->db->where("A.username", $username);
     $this->db->where("A.noso","0"); 
     $this->db->order_by("A.warna","DESC");
