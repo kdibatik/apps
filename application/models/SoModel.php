@@ -11,6 +11,7 @@ class SoModel extends CI_Model
   public $orderps_d = 'tempsops_d';
   public $orderrs_h = 'tempso_h';
   public $orderps_h = 'tempsops_h';
+  public $prod = 'product';
 
   public function __construct()
 
@@ -145,8 +146,9 @@ class SoModel extends CI_Model
   }
 
   public function getOrderDetailrs($noso){
-    $this->db->select('A.noso,A.kodepro,A.ukuran,A.unitqty,A.qty,A.unit,A.warna,A.price,(A.price * A.qty * A.ukuran) as total');
+    $this->db->select('A.noso,A.kodepro,B.namapro,A.ukuran,A.unitqty,A.qty,A.unit,A.warna,A.price,(A.price * A.qty * A.ukuran) as total');
     $this->db->from("{$this->orderrs_d} A");
+     $this->db->join("{$this->prod} B", 'A.kodepro = B.kodepro');
     $this->db->where('A.noso', $noso);
     $this->db->order_by("A.Warna DESC");
     $query = $this->db->get();
@@ -154,8 +156,9 @@ class SoModel extends CI_Model
   }
 
   public function getOrderDetailps($noso){
-    $this->db->select('A.noso,A.kodepro,A.unitqty,A.qty,A.warna,A.price,(A.price * A.qty) as total');
+    $this->db->select('A.noso,A.kodepro,B.namapro,A.unitqty,A.qty,A.warna,A.price,(A.price * A.qty) as total');
     $this->db->from("{$this->orderps_d} A");
+    $this->db->join("{$this->prod} B", 'A.kodepro = B.kodepro');
     $this->db->where('A.noso', $noso);
     $this->db->order_by("A.Warna DESC");
     $query = $this->db->get();
