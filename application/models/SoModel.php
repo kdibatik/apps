@@ -508,7 +508,7 @@ class SoModel extends CI_Model
     $this->db->join("{$this->orderrs_d} C", 'A.noso =C.noso');
     $this->db->where('A.username', $username);
     $this->db->where('A.stsapprove', '2'); // harus 0 karena untuk yg 1 sudah ada di menu search mobile
-    $this->db->where('Month(A.tgl)', $month);
+    // $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
     if ($stsdata=="DS"){
@@ -527,7 +527,7 @@ class SoModel extends CI_Model
     $this->db->join("{$this->orderps_d} C", 'A.noso =C.noso');
     $this->db->where('A.username', $username);
     $this->db->where('A.stsapprove', '2'); // harus 0 karena untuk yg 1 sudah ada di menu search mobile
-    $this->db->where('Month(A.tgl)', $month);
+    // $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
     if($stsdata=="DS"){
