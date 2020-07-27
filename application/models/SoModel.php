@@ -502,18 +502,22 @@ class SoModel extends CI_Model
 
   public function getOrderrslimit($username,$stsdata){
     $month = date('m');
+    $year = date('Y');
     $this->db->select('A.noso,A.tgl,A.ppn,A.ref,B.perusahaan,sum(C.price * C.qty * C.ukuran) as grandtotal,stsapprove');
     $this->db->from("{$this->orderrs_h} A");
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
     $this->db->join("{$this->orderrs_d} C", 'A.noso =C.noso');
     $this->db->where('A.username', $username);
     $this->db->where('A.stsapprove', '2'); // harus 0 karena untuk yg 1 sudah ada di menu search mobile
-    $this->db->where('Month(A.tgl)', $month);
+    // $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
-    // if ($stsdata=="DS"){
-    //   $this->db->limit(5);
-    // }
+    if ($stsdata=="DS"){
+      $this->db->where('Month(A.tgl)', $month);
+      // $this->db->limit(5);
+    }else{
+      $this->db->where('Year(A.tgl)', $year);
+    }
      
     $query = $this->db->get();
     return $query->result();
@@ -521,18 +525,22 @@ class SoModel extends CI_Model
 
   public function getOrderpslimit($username,$stsdata){
     $month = date('m');
+    $year = date('Y');
     $this->db->select('A.noso,A.tgl,A.ppn,A.ref,B.perusahaan,sum(C.price * C.qty) as grandtotal');
     $this->db->from("{$this->orderps_h} A");
     $this->db->join("{$this->cst} B", 'A.cst = B.kodecst');
     $this->db->join("{$this->orderps_d} C", 'A.noso =C.noso');
     $this->db->where('A.username', $username);
     $this->db->where('A.stsapprove', '2'); // harus 0 karena untuk yg 1 sudah ada di menu search mobile
-    $this->db->where('Month(A.tgl)', $month);
+    // $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
-    // if($stsdata=="DS"){
-    //   $this->db->limit(5); 
-    // }
+    if($stsdata=="DS"){
+      $this->db->where('Month(A.tgl)', $month);
+      // $this->db->limit(5); 
+    }else{
+      $this->db->where('Year(A.tgl)', $year);
+    }
     $query = $this->db->get();
     return $query->result();
   }
