@@ -511,9 +511,9 @@ class SoModel extends CI_Model
     // $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
-    if ($stsdata=="DS"){
-      $this->db->limit(5);
-    }
+    // if ($stsdata=="DS"){
+    //   $this->db->limit(5);
+    // }
      
     $query = $this->db->get();
     return $query->result();
@@ -530,9 +530,9 @@ class SoModel extends CI_Model
     // $this->db->where('Month(A.tgl)', $month);
     $this->db->order_by("A.tgl", "DESC");
     $this->db->group_by("A.noso");
-    if($stsdata=="DS"){
-      $this->db->limit(5); 
-    }
+    // if($stsdata=="DS"){
+    //   $this->db->limit(5); 
+    // }
     $query = $this->db->get();
     return $query->result();
   }
